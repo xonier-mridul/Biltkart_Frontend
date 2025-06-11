@@ -4,9 +4,11 @@ import axios from 'axios'
 
 const SupplierProfileUpdate = () => {
     const [userData, setUserData] = useState({})
+   
 
 
     const fetchUserProfileData = async()=>{
+      
         try {
           const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}user/profile`, {withCredentials: true});
           if(response.status === 200){
@@ -17,6 +19,7 @@ const SupplierProfileUpdate = () => {
         } catch (error) {
           console.error(error)
         }
+        
         }
       
         useEffect(() => {
@@ -27,7 +30,7 @@ const SupplierProfileUpdate = () => {
   return (
     <>
       <div className='m-8 flex flex-col gap-8'>
-         <ProfileUpdateComponent userData={userData}/>
+         <ProfileUpdateComponent userData={userData} />
       </div>
     </>
   )

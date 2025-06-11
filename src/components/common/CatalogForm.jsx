@@ -244,6 +244,15 @@ const CatalogForm = () => {
     formDataToSend.append("condition", commercialCondition.condition);
   
     try {
+      if ((Number(paymentSchedule.advance) + Number(paymentSchedule.afterDispatch) + Number(paymentSchedule.afterTesting) + Number(paymentSchedule.onDelivery)) !== 100 ) {
+        return setErrorMessage('Invalid payment schedule distribution ')
+      } 
+      if (
+  new Date(commercialCondition.priceValidity).getTime() < Date.now() ||
+  new Date(commercialCondition.discountValidity).getTime() < Date.now()
+) {
+  return setErrorMessage('Invalid Commercial condition date format');
+}
       const response = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}catalog`,
         formDataToSend,
@@ -384,27 +393,6 @@ const CatalogForm = () => {
             </div>
 
             <div className="flex items-center gap-5">
-              <div className="flex w-1/2 flex-col gap-3">
-                <label className="text-lg" htmlFor="seller">
-                  Select Seller
-                </label>
-                <select
-                  className="w-full border-1 border-zinc-200 outline-none p-3 rounded-lg"
-                  name="seller"
-                  value={formData.seller}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="" hidden>
-                    Select Seller
-                  </option>
-                  {userData.map((item) => (
-                    <option key={item._id} value={item._id}>
-                      {item.company}
-                    </option>
-                  ))}
-                </select>
-              </div>
 
               <div className="flex w-1/2 flex-col gap-3">
                 <label className="text-lg" htmlFor="iso">

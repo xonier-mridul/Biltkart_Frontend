@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Img from "../../assets/team-4.jpg"
 import { FaUserPen } from "react-icons/fa6";
 
-const SupplierProfileComponent = ({userData}) => {
+const SupplierProfileComponent = ({userData, isLoading}) => {
   return (
     <>
       <div className='bg-white rounded-4xl flex flex-col gap-6 border-emerald-500 border-2 '>

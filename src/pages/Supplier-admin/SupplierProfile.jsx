@@ -4,9 +4,10 @@ import SupplierProfileComponent from '../../components/supplier/SupplierProfileC
 
 const SupplierProfile = () => {
   const [userData, setUserData] = useState({})
-
-
+  const [isLoading, setIsLoading] = useState(false)
+ 
   const fetchUserProfileData = async()=>{
+    setIsLoading(true)
   try {
     const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}user/profile`, {withCredentials: true});
     if(response.status === 200){
@@ -15,6 +16,9 @@ const SupplierProfile = () => {
     }
   } catch (error) {
     console.error(error)
+  }
+  finally{
+    setIsLoading(false)
   }
   }
 
@@ -25,7 +29,7 @@ const SupplierProfile = () => {
   return (
     <>
       <div className='m-8 flex flex-col gap-8'>
-          <SupplierProfileComponent userData={userData}/>
+          <SupplierProfileComponent userData={userData} isLoading={isLoading}/>
       </div>
     </>
   )

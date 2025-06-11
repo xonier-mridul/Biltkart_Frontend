@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ChangePasswordForm = () => {
+  const [isLoading, setIsLoading] = useState(false)
   const [oldPassShow, setOldPassShow] = useState(false);
   const [newPassShow, setNewPassShow] = useState(false);
   const [cNewPassShow, setCNewPassShow] = useState(false);
@@ -31,6 +32,7 @@ const ChangePasswordForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
     try {
       if (passwords.newPassword !== passwords.cNewPassword)
         return setMessage(
@@ -61,6 +63,9 @@ const ChangePasswordForm = () => {
     } catch (error) {
       console.error(error?.response?.data?.message);
       setMessage(error?.response?.data?.message);
+    }
+    finally{
+      setIsLoading(false)
     }
   };
 
@@ -198,7 +203,7 @@ const ChangePasswordForm = () => {
                 type="submit"
               >
                 {" "}
-                Submit
+                {isLoading ? "Submitting..." : "Submit"}
               </button>
             </div>
           </form>

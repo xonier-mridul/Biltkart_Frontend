@@ -7,6 +7,8 @@ import axios from 'axios';
 
 
 import { FaArrowLeft } from "react-icons/fa6";
+import { FaUser } from "react-icons/fa";
+import { MdLogout } from "react-icons/md";
 
 const SupplierAdminHeader = () => {
   const [showProfileTab, setShowProfileTab] = useState(false);
@@ -90,9 +92,9 @@ const SupplierAdminHeader = () => {
                  animate={showProfileTab ? {opacity: 1, y: 0, display: "block"} : {opacity: 0, y: 10, display: "none" }}
                  transition={{ duration: .3}}
                  viewport={{ once: true }}
-                 className='w-full bg-white absolute top-[130%] p-8 py-6 rounded-lg shadow-[0_0_15px_#00000020] flex flex-col gap-4 z-40' >
-                  <li><Link to={"profile"} className='text-lg hover:text-green-400 transition-all duration-300'> My Profile </Link></li>
-                  <li><button className='text-lg hover:text-green-400 transition-all duration-300' onClick={handleLogout}> Log Out </button></li>
+                 className=' bg-white absolute w-48 top-[130%] -left-3 p-6 py-6 rounded-lg shadow-[0_0_15px_#00000020] flex flex-col gap-5 z-40' >
+                  <li><Link to={"profile"} className='text-lg hover:text-green-400 transition-all duration-300 flex items-center gap-2'> <FaUser className='text-green-400'/> My Profile </Link></li>
+                  <li><button className='text-lg hover:text-green-400 transition-all duration-300 flex items-center gap-2 cursor-pointer' onClick={handleLogout}> <MdLogout className='text-green-400 text-lg'/> Log Out </button></li>
                  </motion.ul>
              </div>
          </div>

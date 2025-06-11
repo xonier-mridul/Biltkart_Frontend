@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Img from "../../assets/team-4.jpg";
 import { FaUserPen } from "react-icons/fa6";
 import { IoIosArrowBack } from "react-icons/io";
-import { FaUserEdit } from "react-icons/fa";
+import { FaUserEdit, FaListUl } from "react-icons/fa";
 import { MdDelete, MdOutlinePassword } from "react-icons/md";
 
 const UserProfileComponent = ({ userData, currentOrder, buyerOrderDeliveredCount, buyerOrderCount }) => {
@@ -18,18 +18,19 @@ const UserProfileComponent = ({ userData, currentOrder, buyerOrderDeliveredCount
             <span className="capitalize text-2xl font-semibold text-green-500">{userData?.name} <span className="text-green-500 text-xl">({userData?.role})</span></span>
           </h2>
           <div className="flex justify-end items-center gap-4">
+            <Link to={`/admin/suppliers/product-list/${userData?._id}`} className="text-white bg-green-500 hover:bg-green-600  px-6 py-2 rounded-lg hover:scale-104 flex items-center justify-center gap-2 transition-all duration-300 tracking-wide"> <FaListUl /> Product List </Link>
             <Link to={`/admin/${userData.role === 'buyer' ? 'buyer' : 'suppliers'}/update-user/${userData?._id}`} className="text-white bg-green-500 hover:bg-green-600  px-6 py-2 rounded-lg hover:scale-104 flex items-center justify-center gap-2 transition-all duration-300 tracking-wide">
-          <FaUserEdit className="text-xl"/>   Edit Profile
+          <FaUserEdit className="text-xl"/> Edit Profile
           </Link>
             <Link to={`/admin/update-password/${userData?._id}`} className="text-white bg-green-500 hover:bg-green-600  px-6 py-2 rounded-lg hover:scale-104 flex items-center justify-center gap-2 transition-all duration-300 tracking-wide">
-          <MdOutlinePassword className="text-xl"/>   Update Password
+          <MdOutlinePassword className="text-xl"/> Update Password
           </Link>
           <button
             className="bg-teal-600 hover:bg-teal-700 py-2 px-6 rounded-lg text-white flex items-center justify-center gap-1.5 cursor-pointer hover:scale-104 transition-all duration-300 tracking-wide"
             onClick={() => navigate(-1)}
           >
             {" "}
-            <IoIosArrowBack className="text-xl" /> Back{" "}
+            <IoIosArrowBack className="text-xl" /> Back
           </button>
           
           </div>

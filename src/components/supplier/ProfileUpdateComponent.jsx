@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ProfileUpdateComponent = ({ userData }) => {
+  const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -91,6 +92,8 @@ const ProfileUpdateComponent = ({ userData }) => {
   };
 
   const handleSubmit = async (e) => {
+     
+     setIsLoading(true)
     e.preventDefault();
     try {
       const response = await axios.patch(
@@ -109,6 +112,9 @@ const ProfileUpdateComponent = ({ userData }) => {
       console.error(error);
       toast.error("Profile not updated");
     }
+    finally{
+          setIsLoading(false)
+        }
   };
 
   return (
@@ -295,9 +301,9 @@ const ProfileUpdateComponent = ({ userData }) => {
             <div className="flex justify-end mt-6">
               <button
                 type="submit"
-                className="bg-emerald-600 text-white px-6 py-3 rounded-lg"
+                className="bg-emerald-600 text-white px-6 py-3 rounded-lg cursor-pointer hover:bg-emerald-700 transition-all duration-300"
               >
-                Update
+                {isLoading ? "Updating..." : "Update"}
               </button>
             </div>
           </form>

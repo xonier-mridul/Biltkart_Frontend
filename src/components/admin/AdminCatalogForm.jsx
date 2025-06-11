@@ -36,7 +36,7 @@ const AdminCatalogForm = ({ supplierData }) => {
     iso: "",
     specifications: {},
     createdBy: "",
-    coCreator: "",
+   
   });
 
   const [paymentSchedule, setPaymentSchedule] = useState({
@@ -210,18 +210,25 @@ const AdminCatalogForm = ({ supplierData }) => {
   // Fetch User Data, Categories, Sub-Categories,  Specification
 
   useEffect(() => {
-    verifyUser();
+    
     getUsers();
     getCategories();
 
     getSpecification();
   }, []);
 
+  useEffect(() => {
+    verifyUser();
+  }, [selectedSupplier])
+  
+
   // Handle Form Submit
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
+    
     const formDataToSend = new FormData();
     formDataToSend.append("productName", formData.productName);
     formDataToSend.append("category", formData.category);
@@ -258,6 +265,16 @@ const AdminCatalogForm = ({ supplierData }) => {
     formDataToSend.append("condition", commercialCondition.condition);
 
     try {
+      if ((Number(paymentSchedule.advance) + Number(paymentSchedule.afterDispatch) + Number(paymentSchedule.afterTesting) + Number(paymentSchedule.onDelivery)) !== 100 ) {
+        return setErrorMessage('Invalid payment schedule distribution ')
+      } 
+      if (
+  new Date(commercialCondition.priceValidity).getTime() < Date.now() ||
+  new Date(commercialCondition.discountValidity).getTime() < Date.now()
+) {
+  return setErrorMessage('Invalid Commercial condition date format');
+}
+    
       if (!selectedSupplier)
         return setErrorMessage("Please select supplier first");
       const response = await axios.post(
@@ -291,7 +308,7 @@ const AdminCatalogForm = ({ supplierData }) => {
           seller: "",
           iso: "",
           specifications: {},
-          createdBy: "",
+          
         });
 
         setAdditionalSpecs([{ field: "", value: "" }]);

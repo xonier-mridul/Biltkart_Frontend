@@ -104,6 +104,7 @@ import UpdateUser from "./pages/admin/UpdateUser.jsx";
 import AddSupplier from "./pages/admin/AddSupplier.jsx";
 import CreateRFQbyAdmin from "./pages/admin/CreateRFQbyAdmin.jsx";
 import AdminCatalog from "./pages/admin/AdminCatalog.jsx";
+import SupplierProductList from "./pages/admin/SupplierProductList.jsx";
 
 
 
@@ -157,7 +158,7 @@ const router = createBrowserRouter(
         <Route path="suppliers" element={<CommonOutlet/>} >
           <Route index element={<SupplierTable />}/>
           <Route path="add-supplier" element={<AddSupplier/>} />
-          
+          <Route path='product-list/:id' element={<SupplierProductList/>} />
           <Route path="update-user/:id" element={<UpdateUser/>}/>
         </Route>
         <Route path="create-rfq" element={<CommonOutlet/>} >
