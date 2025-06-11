@@ -3,6 +3,7 @@ import axios from "axios";
 import { FaArrowUpLong } from "react-icons/fa6";
 import Counter from "react-countup";
 import { motion, useInView } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const BuyerMonitor = ({orderCount, deliveredOrderCount, buyerCount}) => {
 
@@ -15,8 +16,8 @@ const BuyerMonitor = ({orderCount, deliveredOrderCount, buyerCount}) => {
     <>
       <div className="w-full  rounded-xl">
       <div className="grid grid-cols-4 gap-6">
-        <div ref={ref} className="bg-white flex-col items-center justify-center rounded-4xl border-emerald-500 border-2 overflow-hidden p-9 py-7 flex gap-2">
-          <h3 className="text-xl font-bold uppercase flex justify-start w-full">My Orders</h3>
+        <Link ref={ref} to={`order`} className="bg-white flex-col items-center justify-center rounded-4xl border-emerald-500 border-2 overflow-hidden p-9 py-7 flex gap-2 hover:scale-104 transition-all duration-300 group">
+          <h3 className="text-xl font-bold uppercase flex justify-start w-full group-hover:text-green-500">My Orders</h3>
           <div className="flex gap-2 flex-col justify-center items-end w-full">
             <h3 className="para text-lg">Today's Order</h3>
             <h2 className="flex text-3xl font-bold">
@@ -39,7 +40,7 @@ const BuyerMonitor = ({orderCount, deliveredOrderCount, buyerCount}) => {
               ></motion.div>
           </div>
               </div>
-        </div>
+        </Link>
         <div ref={ref} className="bg-white flex-col items-center justify-center rounded-4xl border-emerald-500 border-2 overflow-hidden p-9 py-7 flex gap-2">
           <h3 className="text-xl font-bold uppercase flex justify-start w-full">Cancel Orders</h3>
           <div className="flex gap-2 flex-col justify-center items-end w-full">
@@ -66,8 +67,8 @@ const BuyerMonitor = ({orderCount, deliveredOrderCount, buyerCount}) => {
           </div>
               </div>
         </div>
-        <div ref={ref} className="bg-white flex-col items-center justify-center rounded-4xl border-emerald-500 border-2 overflow-hidden p-9 py-7 flex gap-2">
-          <h3 className="text-xl font-bold uppercase flex justify-start w-full">Delivered</h3>
+        <Link ref={ref} to={`order-history`} className="bg-white flex-col items-center justify-center rounded-4xl border-emerald-500 border-2 overflow-hidden p-9 py-7 flex gap-2 hover:scale-104 transition-all duration-300 group">
+          <h3 className="text-xl font-bold uppercase flex justify-start w-full group-hover:text-green-500">Delivered</h3>
           <div className="flex gap-2 flex-col justify-center items-end w-full">
             <h3 className="para text-lg">All delivered orders</h3>
             <h2 className="flex text-3xl font-bold">
@@ -90,9 +91,9 @@ const BuyerMonitor = ({orderCount, deliveredOrderCount, buyerCount}) => {
               ></motion.div>
           </div>
               </div>
-        </div>
-        <div ref={ref} className="bg-white flex-col items-center justify-center rounded-4xl border-emerald-500 border-2 overflow-hidden p-9 py-7 flex gap-2">
-          <h3 className="text-xl font-bold uppercase flex justify-start w-full">Buyers </h3>
+        </Link>
+        <div ref={ref} className="bg-white flex-col items-center justify-center rounded-4xl border-emerald-500 border-2 overflow-hidden p-9 py-7 flex gap-2 ">
+          <h3 className="text-xl font-bold uppercase flex justify-start w-full ">Buyers </h3>
           <div className="flex gap-2 flex-col justify-center items-end w-full">
             <h3 className="para text-lg capitalize">Total Buyer</h3>
             <h2 className="flex text-3xl font-bold">

@@ -109,9 +109,9 @@ const MyRFQTable = () => {
                 <th className="p-4 text-start border-l-1 border-zinc-200">
                   Process
                 </th>
-                <th className="p-4 text-start border-l-1 border-zinc-200">
+                {/* <th className="p-4 text-start border-l-1 border-zinc-200">
                   Created Date
-                </th>
+                </th> */}
                 <th className="p-4 text-start border-l-1 border-zinc-200">
                   Updated Date
                 </th>
@@ -134,9 +134,9 @@ const MyRFQTable = () => {
                   <td className="p-4 text-start border-l-1 border-zinc-200">
                     <span className={`${rfq.process === "updated by admin" && "bg-orange-500 text-white"} ${rfq.process === "denied by buyer" && "bg-red-500 text-white"} ${rfq.process === "approved by buyer" && "bg-green-500 text-white"} bg-blue-400 text-white px-3 py-1 rounded-md capitalize text-sm text-nowrap`}> {rfq.process} </span>
                   </td>
-                  <td className="p-4 text-start border-l-1 border-zinc-200">
+                  {/* <td className="p-4 text-start border-l-1 border-zinc-200">
                     <span className="text-lime-500 bg-emerald-50 capitalize text-sm  py-2 px-4 rounded-lg text-nowrap font-medium"> {Create} </span>
-                  </td>
+                  </td> */}
                   <td className="p-4 text-start border-l-1 border-zinc-200">
                    <span className=" text-red-500 bg-red-50 capitalize text-sm  py-2 px-4 rounded-lg text-nowrap font-medium"> {Update} </span>
                   </td>
@@ -184,27 +184,51 @@ const MyRFQTable = () => {
             </tbody>
           </table>
         </div>
-        <div className="flex justify-end items-center p-6 ">
-          <div className="flex items-center gap-4 ">
-            <span className="cursor-pointer">
-              {" "}
-              <FaChevronLeft />{" "}
-            </span>
-            {[...Array(totalPages)].map((_, index) => (
-              <button
-                key={index + 1}
-                onClick={() => handlePageChange(index + 1)}
-                className={` ${
-                  currentPage === index + 1 ? "bg-emerald-500 text-white" : ""
-                } h-9 w-9 rounded-lg flex items-center justify-center cursor-pointer `}>
-                {index + 1}
-              </button>
-            ))}
-            <span className="cursor-pointer">
-              <FaChevronRight />
-            </span>
-          </div>
-        </div>
+        <div className="flex justify-end items-center p-6 pb-8">
+                 <div className="flex items-center gap-2">
+                   <span
+                     className={`cursor-pointer p-2 ${
+                       currentPage === 1 ? "opacity-30 cursor-not-allowed" : ""
+                     }`}
+                     onClick={() => handlePageChange(currentPage - 1)}
+                   >
+                     <FaChevronLeft />
+                   </span>
+       
+                   {(() => {
+                     const startPage = Math.max(1, currentPage - 1);
+                     const endPage = Math.min(totalPages, startPage + 2);
+                     const pagesToShow = [];
+       
+                     for (let i = startPage; i <= endPage; i++) {
+                       pagesToShow.push(
+                         <button
+                           key={i}
+                           onClick={() => handlePageChange(i)}
+                           className={`h-9 w-9 rounded-lg flex items-center justify-center cursor-pointer ${
+                             currentPage === i ? "bg-emerald-600 text-white" : ""
+                           }`}
+                         >
+                           {i}
+                         </button>
+                       );
+                     }
+       
+                     return pagesToShow;
+                   })()}
+       
+                   <span
+                     className={`cursor-pointer p-2 ${
+                       currentPage === totalPages
+                         ? "opacity-30 cursor-not-allowed"
+                         : ""
+                     }`}
+                     onClick={() => handlePageChange(currentPage + 1)}
+                   >
+                     <FaChevronRight />
+                   </span>
+                 </div>
+               </div>
       </div>
     </>
   );

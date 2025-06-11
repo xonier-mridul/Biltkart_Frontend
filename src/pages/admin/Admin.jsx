@@ -115,7 +115,7 @@ const Admin = () => {
             )}
           </div>
 
-          <ul className="flex flex-col gap-3 p-3 pt-0 overflow-y-scroll admin-sidebar h-full ">
+          <ul className="flex flex-col gap-3 p-3 pt-0 overflow-y-scroll admin-sidebar h-[80vh] ">
             <li className="">
               <Link
                 to={"/admin"}

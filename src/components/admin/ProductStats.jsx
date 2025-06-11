@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { Link } from 'react-router-dom'
 
 
 const data = [
@@ -57,10 +58,11 @@ const ProductStats = ({orderData}) => {
   const [productData, setProductData] = useState(data)
     
   return (
-    <div className='bg-white p-5 rounded-4xl border-emerald-500 border-2'>
+    <div className='bg-white p-5 rounded-4xl border-emerald-500 border-2 '>
         <h3 className='capitalize font-bold text-[22px]' > Recent Orders</h3>
         <p className='para text-xl capitalize pb-5' > updated 37 minutes ago</p>
-        <table className='w-full border-[1px] border-[#f1f1f1]'>
+        <div className='w-full overflow-x-scroll'>
+        <table className='w-full border-[1px] border-[#f1f1f1] '>
             <thead>
                 <tr>
 
@@ -74,7 +76,7 @@ const ProductStats = ({orderData}) => {
                 {orderData.length> 0 ? orderData.map(e=>(
 
                 <tr className='border-b-1 border-[#f1f1f1]' key={e._id}>
-                    <td className='p-4 para text-sm'>{e?._id}</td>
+                    <td className='p-4 para text-sm'> <Link to={`order/order-detail/${e?._id}`} className='hover:text-green-500 transition-all duration-300 hover:scale-105'>{e?._id}</Link></td>
                     <td className='p-4  border-l-1 border-[#f1f1f1] capitalize'>{e?.vrfqId?.brfqId?.rfqId?.product || "N/A"}</td>
                     <td className='p-4  border-l-1 border-[#f1f1f1] capitalize'>{e?.vrfqId?.brfqId?.rfqId?.quantity || "N/A"}</td>
                     <td className=' p-4 border-l-1  border-[#f1f1f1] capitalize text-sm'> <span className={`${e?.process === "delivered" ? "text-green-400 bg-green-100" : "text-orange-500 bg-orange-100 "} p-2 px-4 tracking-wide rounded-md font-semibold `}> {e?.process } </span></td>
@@ -88,6 +90,7 @@ const ProductStats = ({orderData}) => {
             </tbody>
 
         </table>
+        </div>
     </div>
   )
 }

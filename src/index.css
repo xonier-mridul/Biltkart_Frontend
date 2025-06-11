@@ -376,27 +376,6 @@ left: 0;
   object-fit: cover;
 }
 
-/* .slick-arrow.slick-prev{
-  font-weight: 700;
-    text-transform: capitalize;
-    color: var(--white-color);
-    background-image: linear-gradient(to right, var(--dark-color) 0%, var(--accent-color) 50%, var(--dark-color) 100%);
-    border-radius: 100px;
-    background-size: 200% auto;
-    transition: all 0.4s ease-in-out;
-    height: 50px;
-    width: 50px;
-    border-radius: 100%;
-    z-index: 99;
-}
-
-.slick-arrow.slick-prev:hover{
-  background-position: right center;
-}
-.slick-arrow.slick-prev:focus{
-  background-position: right center !important;
-} */
-
 
 .height-anim{
   animation: height-anim .2s linear ;
@@ -539,6 +518,13 @@ left: 0;
   /* box-shadow: 0px 0px 10px #01929770 !important; */
 }
 
+.group-hover\:text-green-500 {
+    &:is(:where(.group):hover *) {
+        @media (hover: hover) {
+            color: var(--color-green-500) 
+        }
+    }
+}
 
 
 

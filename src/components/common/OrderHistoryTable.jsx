@@ -74,27 +74,50 @@ const OrderHistoryTable = ({ orderData, totalPages,currentPage, setCurrentPage }
             </tbody>
         </table>
         <div className="flex justify-end items-center p-6 pb-0">
-                    <div className="flex items-center gap-4 ">
-                      <span className="cursor-pointer">
-                        {" "}
-                        <FaChevronLeft />{" "}
-                      </span>
-                      {[...Array(totalPages)].map((_, index) => (
-                        <button
-                          key={index + 1}
-                          onClick={() => handlePageChange(index + 1)}
-                          className={` ${
-                            currentPage === index + 1 ? "bg-emerald-500 text-white" : ""
-                          } h-9 w-9 rounded-lg flex items-center justify-center cursor-pointer `}
-                        >
-                          {index + 1}
-                        </button>
-                      ))}
-                      <span className="cursor-pointer">
-                        <FaChevronRight />
-                      </span>
-                    </div>
-                  </div>
+                 <div className="flex items-center gap-2">
+                   <span
+                     className={`cursor-pointer p-2 ${
+                       currentPage === 1 ? "opacity-30 cursor-not-allowed" : ""
+                     }`}
+                     onClick={() => handlePageChange(currentPage - 1)}
+                   >
+                     <FaChevronLeft />
+                   </span>
+       
+                   {(() => {
+                     const startPage = Math.max(1, currentPage - 1);
+                     const endPage = Math.min(totalPages, startPage + 2);
+                     const pagesToShow = [];
+       
+                     for (let i = startPage; i <= endPage; i++) {
+                       pagesToShow.push(
+                         <button
+                           key={i}
+                           onClick={() => handlePageChange(i)}
+                           className={`h-9 w-9 rounded-lg flex items-center justify-center cursor-pointer ${
+                             currentPage === i ? "bg-emerald-600 text-white" : ""
+                           }`}
+                         >
+                           {i}
+                         </button>
+                       );
+                     }
+       
+                     return pagesToShow;
+                   })()}
+       
+                   <span
+                     className={`cursor-pointer p-2 ${
+                       currentPage === totalPages
+                         ? "opacity-30 cursor-not-allowed"
+                         : ""
+                     }`}
+                     onClick={() => handlePageChange(currentPage + 1)}
+                   >
+                     <FaChevronRight />
+                   </span>
+                 </div>
+               </div>
       </div>
       </div>
     </>
