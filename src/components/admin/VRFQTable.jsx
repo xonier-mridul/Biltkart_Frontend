@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
-import { FaEye } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
-const VRFQTable = ({ vrfqData, vendorData }) => {
+import { FaEye, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
+const VRFQTable = ({ vrfqData, vendorData, currentPage, setCurrentPage, totalPages }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedVendor, setSelectedVendor] = useState("");
   
   const navigate = useNavigate();
+
+   const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   const handleVendorFilter = (e) => {
     setSelectedVendor(e.target.value);
@@ -55,7 +62,6 @@ const VRFQTable = ({ vrfqData, vendorData }) => {
             <tr className="bg-slate-100">
               <th className='p-4 text-start'> VRFQ ID </th>
               <th className="p-4 text-start border-l-1 border-[#f1f1f1] capitalize">BRFQ ID </th>
-              <th className="p-4 text-start border-l-1 border-[#f1f1f1] capitalize text-nowrap">Vendor Name </th>
               <th className="p-4 text-start border-l-1 border-[#f1f1f1] capitalize">Vender</th>
               <th className="p-4 text-start border-l-1 border-[#f1f1f1]  capitalize">Product</th>
               <th className="p-4 text-start border-l-1 border-[#f1f1f1] capitalize">Action</th>
@@ -64,11 +70,11 @@ const VRFQTable = ({ vrfqData, vendorData }) => {
           <tbody>
             {length > 0 ? filteredData.map((item) => (
               <tr key={item._id}>
-                <td className="p-4 border-b-[1px] border-[#f1f1f1] ">{item?._id || "N/A"}</td>
-                <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]"><span className='capitalize'>{item.brfqId?._id || "N/A"}</span></td>
-                <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]"><span className='capitalize'>{item.createdBy?.name || "N/A"}</span></td>
+                <td className="p-4 border-b-[1px] border-[#f1f1f1] "><Link className='hover:text-teal-500 transition-all duration-300' to={`vrfq-detail/${item._id}`}> {item?._id || "N/A"} </Link></td>
+                <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]"><Link className='hover:text-teal-500 transition-all duration-300' to={`/admin/brfq/detail/${item.brfqId?._id}`}>{item.brfqId?._id || "N/A"}</Link></td>
+                
                 <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]">
-                  <span className=' text-lime-500 bg-emerald-50  text-sm capitalize py-2 px-4 rounded-lg text-nowrap font-medium'>{item.createdBy?.company || "N/A"}</span>
+                  <Link to={`/admin/user-profile/${item?.createdBy?._id}`} className=' text-lime-500 hover:text-white bg-emerald-50 hover:bg-green-500 text-sm capitalize py-2 px-4 rounded-lg text-nowrap font-medium transition-all duration-300'>{item.createdBy?.company || "N/A"}</Link>
                 </td>
                 <td className="p-4 border-b-[1px] border-l-1 capitalize border-[#f1f1f1]">{item.brfqId?.rfqId?.product || "N/A"}</td>
                 <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]">
@@ -84,6 +90,51 @@ const VRFQTable = ({ vrfqData, vendorData }) => {
             )}
           </tbody>
         </table>
+         <div className="flex justify-end items-center p-6 pb-0">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`cursor-pointer p-2 ${
+                        currentPage === 1 ? "opacity-30 cursor-not-allowed" : ""
+                      }`}
+                      onClick={() => handlePageChange(currentPage - 1)}
+                    >
+                      <FaChevronLeft />
+                    </span>
+        
+                    {(() => {
+                      const startPage = Math.max(1, currentPage - 1);
+                      const endPage = Math.min(totalPages, startPage + 2);
+                      const pagesToShow = [];
+        
+                      for (let i = startPage; i <= endPage; i++) {
+                        pagesToShow.push(
+                          <button
+                            key={i}
+                            onClick={() => handlePageChange(i)}
+                            className={`h-9 w-9 rounded-lg flex items-center justify-center cursor-pointer ${
+                              currentPage === i ? "bg-emerald-600 text-white" : ""
+                            }`}
+                          >
+                            {i}
+                          </button>
+                        );
+                      }
+        
+                      return pagesToShow;
+                    })()}
+        
+                    <span
+                      className={`cursor-pointer p-2 ${
+                        currentPage === totalPages
+                          ? "opacity-30 cursor-not-allowed"
+                          : ""
+                      }`}
+                      onClick={() => handlePageChange(currentPage + 1)}
+                    >
+                      <FaChevronRight />
+                    </span>
+                  </div>
+                </div>
       </div>
     </>
   );

@@ -89,32 +89,12 @@ const ProductListsForSupplierTable = () => {
         `${import.meta.env.VITE_SERVER_URL}catalog/${id}`
       );
       if (response.status === 200) {
-        toast.success("Product deleted successfully", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          style: { backgroundColor: "#009689", color: "#fff" },
-        });
+        toast.success("Product deleted successfully");
         setCatalogData((prev) => prev.filter((item) => item._id !== id));
       }
     } catch (error) {
       console.error(error.message);
-      toast.error("Product not deleted successfully", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        style: { backgroundColor: "#009689", color: "#fff" },
-      });
+      toast.error("Product not deleted successfully");
     }
   };
 
@@ -192,7 +172,7 @@ const ProductListsForSupplierTable = () => {
                   >
                     <td className="p-4 border-zinc-200 border-l-1">
                       <span className="capitalize">
-                        {item.seller?.company}
+                        {item.createdBy?.company}
                       </span>
                     </td>
                     <td className="p-4 border-zinc-200 border-l-1">

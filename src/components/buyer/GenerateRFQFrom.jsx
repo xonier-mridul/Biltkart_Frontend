@@ -373,7 +373,7 @@ const quantitySeparation = () => {
       )}
 
       {downloadConditionPopup && (
-        <div className="fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-2xl w-[790px]">
+        <div className="fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-2xl w-[720px]">
           <div className="mb-5">
             <h2 className="text-xl font-bold">
               Excel File data fill condition
@@ -387,13 +387,13 @@ const quantitySeparation = () => {
           </div>
           <ul className="flex flex-col gap-3">
             <li className="flex items-center gap-3">
-              <FaStarOfLife className="text-[12px] text-orange-500" /> Make sure
+              <FaStarOfLife className="text-[12px] text-green-500" /> Make sure
               filled field as per Specified Parameters.
             </li>
-            <li className="flex items-center gap-3">
-              <FaStarOfLife className="text-[12px] text-orange-500" /> Please
+            <li className="flex items-center justify-start gap-3">
+              <FaStarOfLife className="text-[12px] text-green-500" /> Please
               make sure do not escape any empty assigned row & column, if you
-              don't have data fill. <span className="font-semibold">"N/A"</span>{" "}
+              don't have data fill. <span className="font-semibold">"N/A"</span>
             </li>
           </ul>
           <div className="flex gap-3 py-3">
@@ -409,7 +409,7 @@ const quantitySeparation = () => {
           <div>
             <button
               disabled={!agreement}
-              className="bg-orange-500 disabled:bg-orange-300 px-5 py-2 rounded-lg text-white flex items-center gap-2 cursor-pointer"
+              className="bg-green-500 disabled:bg-green-300 px-5 py-2 rounded-lg text-white flex items-center gap-2 cursor-pointer"
               onClick={downloadSpecSheet}
             >
               Download <FaDownload />

@@ -112,10 +112,10 @@ const SupplierAdmin = () => {
             < Link to={'my-quotation'} className="admin-list w-full tabs flex gap-3 text-xl items-center hover:bg-white transition-all duration-300 p-2 rounded-lg hover:text-teal-950 cursor-pointer"> <span className="bg-emerald-500 text-white h-8 w-8 min-w-8  rounded-full flex justify-center items-center tabs-icon "> <FaShoppingCart className="text-xl "/></span>  <span className={`${showSidebar ? "opacity-100" : "opacity-0"} transition-all duration-300 capitalize `}> My Quotations </span> </ Link>
             
           </li>
-          <li className="">
+          {/* <li className="">
             < Link to={''} className="admin-list w-full flex gap-3 text-xl items-center tabs hover:bg-white transition-all duration-300 p-2 rounded-lg hover:text-teal-950 cursor-pointer"> <span className="bg-emerald-500 text-white h-8 w-8 min-w-8  rounded-full flex justify-center items-center tabs-icon "> <IoIosNotifications  className="text-xl "/></span>  <span className={`${showSidebar ? "opacity-100" : "opacity-0"} transition-all duration-300 capitalize `}> Notifications </span> </ Link>
             
-          </li>
+          </li> */}
           <li className="flex flex-col gap-4">
             < button className="relative admin-list w-full flex gap-3 justify-between text-xl tabs items-center hover:bg-white transition-all duration-300 p-2 rounded-lg hover:text-teal-950 cursor-pointer" onClick={()=>handleShowSubMenu("product")}> <div className="flex gap-3 items-center"> <span className="bg-emerald-500 tabs-icon text-white h-8 w-8 min-w-8  rounded-full flex justify-center items-center  "> <AiFillProduct className="text-xl "/></span>  <span className={`${showSidebar ? "opacity-100" : "opacity-0"} transition-all duration-300 capitalize `}> Products   </span> </div> <span className="text-neutral-400 text-xl"> <FaAngleDown /> </span>
              </ button>

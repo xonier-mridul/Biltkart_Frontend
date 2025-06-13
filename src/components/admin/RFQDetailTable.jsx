@@ -37,9 +37,9 @@ const RFQDetailTable = () => {
 
   return (
     <>
-      <div className='bg-white rounded-4xl flex flex-col gap-6 border-emerald-500 border-2 p-8'>
+      <div className='bg-white rounded-4xl flex flex-col gap-12 border-emerald-500 border-2 p-8'>
         <div className="">
-          <h2 className='font-semibold text-2xl'> RFQ id: <span className='text-orange-500'>{RFQData?._id || "N/A"} </span></h2>
+          <h2 className='font-semibold text-2xl'> <span className='text-red-500'>*</span> RFQ id: <span className='text-orange-500'>{RFQData?._id || "N/A"} </span></h2>
         </div>
         <table className='w-full border-[1px] border-[#eff2f5]'>
         <tbody>
@@ -85,8 +85,8 @@ const RFQDetailTable = () => {
         </tr>
         </tbody>
         </table>
-        <div className='flex flex-col gap-5 '>
-            <h2 className='font-semibold text-2xl'>Quantity with Delivery date</h2>
+        <div className='flex flex-col gap-9 '>
+            <h2 className='font-semibold text-2xl'><span className='text-red-500'>*</span> Quantity with Delivery date</h2>
             <table className='w-full border-[1px] border-zinc-200'>
                 <thead>
                     
@@ -119,8 +119,8 @@ const RFQDetailTable = () => {
             </table>
 
         </div>
-         <div className="flex flex-col gap-5 overflow-x-scroll">
-          <h2 className="font-semibold text-2xl">Specification Data</h2>
+         <div className="flex flex-col gap-9 overflow-x-scroll">
+          <h2 className="font-semibold text-2xl"> <span className='text-red-500'>*</span> Specification Data</h2>
           <table className="w-full border border-zinc-200 overflow-x-scroll">
             <thead>
               <tr className="bg-slate-100 border-b border-zinc-200">

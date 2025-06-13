@@ -3,10 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import ProductViewTable from '../../components/admin/ProductViewTable';
+import api from '../../components/common/api';
 
 const ProductViewPage = () => {
  // States Start
       const [catalogData, setCatalogData] = useState([])
+     
 
       // States End
   
@@ -27,9 +29,12 @@ const ProductViewPage = () => {
         console.error("Error fetching catalog:", error.message);
       }
     };
+
+   
   
     useEffect(() => {
       getCatalogById();
+     
     }, [id]);
   
 
@@ -38,7 +43,7 @@ const ProductViewPage = () => {
       <div className='p-5 flex flex-col gap-5'>
        
        
-         <ProductViewTable catalogData={catalogData}/>
+         <ProductViewTable catalogData={catalogData} />
 
       </div>
     </>

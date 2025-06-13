@@ -9,6 +9,7 @@ import { MdOutlinePercent,  MdCurrencyRupee } from "react-icons/md";
 const ProductEditPage = ({ categoryData, subCategoryData, sellerData}) => {
   
     const [catalogData, setCatalogData] = useState(null);
+    const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     productName:"",
     category: "",
@@ -39,14 +40,14 @@ const ProductEditPage = ({ categoryData, subCategoryData, sellerData}) => {
       if (response.status === 200) {
         setCatalogData(response.data);
         setFormData({
-          productName: response.data.productName || "",
-          category: response.data.category._id || "",
-          subCategory: response.data.subCategory._id || "",
-          seller: response.data.seller._id || "",
-          iso: response.data.iso || "",
-          specifications: response.data.specifications.map((spec) => ({
-            key: spec.key._id || "",
-            name: spec.key.name || "",
+          productName: response.data?.productName || "",
+          category: response.data.category?._id || "",
+          subCategory: response.data?.subCategory._id || "",
+          seller: response.data.seller?._id || "",
+          iso: response.data?.iso || "",
+          specifications: response.data?.specifications?.map((spec) => ({
+            key: spec.key?._id || "",
+            name: spec.key?.name || "",
             value: spec.value || "",
           })),
           addSpecifications: response.data.addSpecifications.map((spec) => ({
@@ -106,6 +107,8 @@ const ProductEditPage = ({ categoryData, subCategoryData, sellerData}) => {
     }));
   };
 
+
+
   const handleCommercialConditionChange = (e)=>{
     const {name, value} = e.target;
     setFormData(prevData=> ({
@@ -117,6 +120,7 @@ const ProductEditPage = ({ categoryData, subCategoryData, sellerData}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
     try {
       const response = await axios.patch(`${import.meta.env.VITE_SERVER_URL}catalog/update/${id}`, formData, {withCredentials: true});
       if (response.status === 200) {
@@ -136,6 +140,9 @@ const ProductEditPage = ({ categoryData, subCategoryData, sellerData}) => {
     } catch (error) {
       console.log(error.message);
       toast.error("Catalog not updated");
+    }
+    finally{
+      setIsLoading(false)
     }
   };
 
@@ -297,7 +304,7 @@ const ProductEditPage = ({ categoryData, subCategoryData, sellerData}) => {
 
 
           <div className="flex items-center justify-end">
-            <button type="submit" className="rounded-lg bg-emerald-600 px-6 py-3 text-white w-fit cursor-pointer">Update</button>
+            <button type="submit" className="rounded-lg bg-emerald-600 px-6 py-3 text-white w-fit cursor-pointer">{isLoading ? "Updating..." : "Update"}</button>
           </div>
         </form>
       </div>

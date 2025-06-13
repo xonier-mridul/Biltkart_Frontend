@@ -215,11 +215,11 @@ const Admin = () => {
                     RFQ List
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to={""} className="capitalize text-xl ">
                     Negotiations
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link to={"approved-rfq"} className="capitalize text-xl ">
                     Approved RFQ{" "}
@@ -263,11 +263,11 @@ const Admin = () => {
                     Send BRFQ
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to={""} className="capitalize text-xl ">
                     Track BRFQ
                   </Link>
-                </li>
+                </li> */}
              
               </ul>
             </li>
@@ -311,16 +311,16 @@ const Admin = () => {
                     Compare Quotation
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to={""} className="capitalize text-xl ">
                     Track VRFQ
                   </Link>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <Link to={""} className="capitalize text-xl ">
                    VRFQ Evaluation
                   </Link>
-                </li>
+                </li> */}
              
               </ul>
             </li>
@@ -467,7 +467,7 @@ const Admin = () => {
                     order history
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to={""} className="capitalize text-xl ">
                     order details
                   </Link>
@@ -476,7 +476,7 @@ const Admin = () => {
                   <Link to={""} className="capitalize text-xl ">
                     invoice
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </li>
             <li className="">

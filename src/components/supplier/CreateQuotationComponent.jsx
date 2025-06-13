@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { IoIosPricetag } from "react-icons/io";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -224,7 +225,7 @@ const CreateQuotationComponent = () => {
           </button>
         </div>
 
-        <div className="w-full flex flex-col gap-4 px-8 pb-8">
+        <div className="w-full flex flex-col gap-8 px-8 pb-8">
           <div className="flex justify-between items-center">
             <h2 className="font-semibold text-xl">Delivery Schedule</h2>
             <h2 className="font-semibold text-xl">
@@ -316,9 +317,9 @@ const CreateQuotationComponent = () => {
           </form>
           {/* PRICE TABLE */}
 
-          <div className="w-full flex flex-col gap-4">
+          <div className="w-full flex flex-col gap-6">
             <div className="flex justify-end items-center">
-               <button className="bg-emerald-600 text-white px-6 py-2.5 rounded-lg w-fit cursor-pointer hover:scale-105 transition-all duration-300" onClick={()=>setShowPrisePopup(true)}> Edit Prise </button>
+               <button className="bg-emerald-600 text-white px-6 py-2.5 rounded-lg w-fit cursor-pointer hover:scale-105 transition-all duration-300 flex items-center gap-2" onClick={()=>setShowPrisePopup(true)}> <IoIosPricetag className="text-lg"/> Edit Price  </button>
             </div>
             <table className="w-full border-1 border-stone-200">
               <thead>

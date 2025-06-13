@@ -19,39 +19,39 @@ const SupplierProfileComponent = ({userData, isLoading}) => {
              </div>
              <div className="w-3/4 grid grid-cols-2 gap-5">
                <div className='flex gap-2 items-center col-span-2'>
-                <h3 className='text-xl font-semibold'>User Id:</h3> <span className='capitalize text-xl tracking-wide'>{userData._id || "N/A"}</span>
+                <h3 className='text-xl font-semibold'>User Id:</h3> <span className='capitalize text-xl tracking-wide text-green-500'>{userData._id || "N/A"}</span>
                </div>
              
                <div className='flex gap-2 items-center'>
-                <h3 className='text-xl font-semibold'>Name:</h3> <span className='capitalize text-xl tracking-wide'>{userData.name || "N/A"}</span>
+                <h3 className='text-xl font-semibold'>Name:</h3> <span className='capitalize text-xl tracking-wide text-green-500'>{userData.name || "N/A"}</span>
                </div>
              
                <div className='flex gap-2 items-center'>
-                <h3 className='text-xl font-semibold'>Billing Name:</h3> <span className='capitalize text-xl tracking-wide'>{userData.billingName || "N/A"}</span>
+                <h3 className='text-xl font-semibold'>Billing Name:</h3> <span className='capitalize text-xl tracking-wide text-green-500'>{userData.billingName || "N/A"}</span>
                </div>
              
                <div className='flex gap-2 items-center'>
-                <h3 className='text-xl font-semibold'>Company:</h3> <span className='capitalize text-xl tracking-wide'>{userData.company || "N/A"}</span>
+                <h3 className='text-xl font-semibold'>Company:</h3> <span className='capitalize text-xl tracking-wide text-green-500'>{userData.company || "N/A"}</span>
                </div>
              
                <div className='flex gap-2 items-center'>
-                <h3 className='text-xl font-semibold'>Category:</h3> <span className='capitalize text-xl tracking-wide'>{userData.category || "N/A"}</span>
+                <h3 className='text-xl font-semibold'>Category:</h3> <span className='capitalize text-xl tracking-wide text-green-500'>{userData.category || "N/A"}</span>
                </div>
              
                <div className='flex gap-2 items-center'>
-                <h3 className='text-xl font-semibold'>Email:</h3> <span className=' text-xl tracking-wide'>{userData.email || "N/A"}</span>
+                <h3 className='text-xl font-semibold'>Email:</h3> <span className=' text-xl tracking-wide text-green-500'>{userData.email || "N/A"}</span>
                </div>
 
                <div className='flex gap-2 items-center'>
-                <h3 className='text-xl font-semibold'>Number:</h3> <span className=' text-xl tracking-wide'>{userData.number || "N/A"}</span>
+                <h3 className='text-xl font-semibold'>Number:</h3> <span className=' text-xl tracking-wide text-green-500'>{userData.number || "N/A"}</span>
                </div>
 
                <div className='flex gap-2 items-center'>
-                <h3 className='text-xl font-semibold'>Role:</h3> <span className='capitalize text-xl tracking-wide'>{userData.role || "N/A"}</span>
+                <h3 className='text-xl font-semibold'>Role:</h3> <span className='capitalize text-xl tracking-wide text-green-500' >{userData.role || "N/A"}</span>
                </div>
 
                <div className='flex gap-2 items-center'>
-                <h3 className='text-xl font-semibold'>Member Since:</h3> <span className='capitalize text-xl tracking-wide'>{new Date(userData.createdAt).toLocaleDateString() || "N/A"}</span>
+                <h3 className='text-xl font-semibold'>Member Since:</h3> <span className='capitalize text-xl tracking-wide text-green-500'>{new Date(userData.createdAt).toLocaleDateString() || "N/A"}</span>
                </div>
              </div>
              </div> 
@@ -61,7 +61,7 @@ const SupplierProfileComponent = ({userData, isLoading}) => {
          
          <div className='flex flex-col gap-6'>
            {userData?.branchDetail?.map((item, index)=>(
-            <div key={item._id} className='bg-sky-200 grid grid-cols-2 gap-5 rounded-lg p-8'>
+            <div key={item._id} className='bg-sky-100 grid grid-cols-2 gap-5 rounded-lg p-8'>
               <div className='flex gap-2 items-center'>
                 <h3 className='text-xl font-semibold'>GST number:</h3> <span className='capitalize text-xl tracking-wide'>{item.gstNumber || "N/A"}</span>
                </div>

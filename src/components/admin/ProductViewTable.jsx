@@ -11,10 +11,9 @@ import { FaUserEdit, FaListUl } from "react-icons/fa";
 
 
 const ProductViewTable = () => {
-      // States Start
+       const [userData, setUserData] = useState(null)
       const [catalogData, setCatalogData] = useState([])
 
-      // States End
   
      const {id} = useParams();
      const navigate = useNavigate();
@@ -33,9 +32,21 @@ const ProductViewTable = () => {
         console.error("Error fetching catalog:", error.message);
       }
     };
+
+     const verifyUser = async()=>{
+          try {
+            const response = await api.get(`/auth/verify-auth`, {withCredentials: true})
+            if(response.status === 200){
+          setUserData(response.data?.user)
+            }
+          } catch (error) {
+            console.error("Error verifying user:", error.message);
+          }
+        }
   
     useEffect(() => {
       getCatalogById();
+       verifyUser()
     }, [id]);
      
   return (
@@ -46,7 +57,7 @@ const ProductViewTable = () => {
              <h2 className='font-semibold text-2xl capitalize'>{catalogData?.productName || "N/A"}</h2>
               <div className='flex items-center gap-5'>
              <Link to={"/admin/product-list"} className='text-lg text-white bg-emerald-600 py-2.5 px-6 rounded-lg cursor-pointer flex items-center gap-2'> <FaListUl className='text-lg'/> Product list </Link>
-             <Link to={`/admin/product-list/product-edit/${catalogData?._id}`} className='text-lg text-white bg-emerald-600 py-2.5 px-6 rounded-lg cursor-pointer flex items-center gap-2'> <FaUserEdit className='text-xl'/> Edit Product
+             <Link to={`/${userData?.role ==="admin"? "admin":"supplier-admin"}/product-list/product-edit/${catalogData?._id}`} className='text-lg text-white bg-emerald-600 py-2.5 px-6 rounded-lg cursor-pointer flex items-center gap-2'> <FaUserEdit className='text-xl'/> Edit Product
              </Link>
               </div>
             </div>
@@ -55,7 +66,7 @@ const ProductViewTable = () => {
                 <tbody>
                     <tr className='border-b-1 border-zinc-200'>
                         <th  className='bg-slate-100 border-b-1 border-zinc-200 w-1/3 p-4 px-6 font-semibold text-lg text-start'>Supplier</th>
-                        <td className='w-2/3 p-4 px-6 text-lg'> <span className='capitalize'>{catalogData?.seller?.company || "N/A"} </span></td>
+                        <td className='w-2/3 p-4 px-6 text-lg'> <span className='capitalize'>{catalogData?.createdBy?.company || "N/A"} </span></td>
 
                     </tr>
                     <tr className='border-b-1 border-zinc-200'>

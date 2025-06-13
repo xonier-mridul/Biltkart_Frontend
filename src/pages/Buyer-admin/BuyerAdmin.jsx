@@ -107,10 +107,10 @@ const BuyerAdmin = () => {
             < Link to={'my-rfq'} className="admin-list w-full flex gap-3 text-xl items-center hover:bg-white transition-all duration-300 p-2 rounded-lg hover:text-teal-950 cursor-pointer tabs"> <span className="bg-emerald-600 tabs-icon  text-white h-8 w-8 min-w-8  rounded-full flex justify-center items-center  "> <FaShoppingCart className="text-xl "/></span>  <span className={`${showSidebar ? "opacity-100" : "opacity-0"} transition-all duration-300 capitalize `}> My RFQs </span> </ Link>
             
           </li>
-          <li className="">
+          {/* <li className="">
             < Link to={'compare-quotation'} className="admin-list w-full flex gap-3 text-xl items-center hover:bg-white transition-all duration-300 p-2 rounded-lg hover:text-teal-950 cursor-pointer tabs"> <span className="bg-emerald-600 text-white h-8 w-8 min-w-8 tabs-icon  rounded-full flex justify-center items-center  "> <FaCodeCompare className="text-xl "/></span>  <span className={`${showSidebar ? "opacity-100" : "opacity-0"} transition-all duration-300 capitalize `}> Compare Quotation </span> </ Link>
             
-          </li>
+          </li> */}
           <li  className="flex flex-col gap-3">
             < button onClick={()=>handleSubmenu("order")} className="admin-list tabs  relative w-full flex  gap-3 text-xl justify-between items-center hover:bg-white transition-all duration-300 p-2 rounded-lg hover:text-teal-950 cursor-pointer"> <div className="flex gap-3  items-center"> <span className="bg-emerald-600 text-white h-8 w-8 min-w-8  rounded-full flex justify-center items-center  tabs-icon"> <FaHistory className="text-xl "/></span>  <span className={`${showSidebar ? "opacity-100" : "opacity-0"} transition-all duration-300 capitalize `}> Order  </span> </div> <IoIosArrowDown className={`${submenuShow === "order" ? "rotate-180" : "rotate-0"} transition-all duration-300`}/>
             

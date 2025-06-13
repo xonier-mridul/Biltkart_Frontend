@@ -107,7 +107,7 @@ const RFQHistoryComponent = ({ id, rfqHistory }) => {
         </div>
       </div>
 
-      <div className="bg-white shadow-lg rounded-2xl   border-2 border-emerald-500">
+     {rfqHistory.length > 0 && <div className="bg-white shadow-lg rounded-2xl   border-2 border-emerald-500">
         <div className="mb-5 flex justify-between items-center px-8 py-4 border-b-1 border-gray-300">
           <h2 className="text-xl font-bold">
             Order Quantity with Delivery date
@@ -138,7 +138,7 @@ const RFQHistoryComponent = ({ id, rfqHistory }) => {
             </thead>
             <tbody>
               
-                { item?.spreadQuantityData.map((item, indexx) => (
+                {item?.spreadQuantityData.length > 0 ? item?.spreadQuantityData.map((item, indexx) => (
                   <tr key={item._id} className={` ${index%2 === 0 && "bg-white"} border-b-1 border-zinc-200`}>
                     <td className="p-4">{indexx + 1}</td>
                     <td className="p-4 border-l-1 border-zinc-200">
@@ -155,13 +155,17 @@ const RFQHistoryComponent = ({ id, rfqHistory }) => {
                         : "N/A"}
                     </td>
                   </tr>
-                ))}
+                )) : (
+                  <tr>
+                    <td colSpan={4} className="text-center p-4"> Data not found </td>
+                  </tr>
+                )}
             </tbody>
           </table>
           </div>
               )))}
         </div>
-      </div>
+      </div> }
     </>
   );
 };

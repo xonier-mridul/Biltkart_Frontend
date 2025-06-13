@@ -26,7 +26,6 @@ const CatalogForm = () => {
     productName: "",
     category: "",
     subCategory: "",
-    seller: "",
     iso: "",
     specifications: {},
     createdBy: "",
@@ -211,7 +210,7 @@ const CatalogForm = () => {
     formDataToSend.append("productName", formData.productName)
     formDataToSend.append("category", formData.category);
     formDataToSend.append("subCategory", formData.subCategory);
-    formDataToSend.append("seller", formData.seller);
+   
     formDataToSend.append("iso", formData.iso);
     formDataToSend.append("createdBy", formData.createdBy);
   
@@ -265,24 +264,14 @@ const CatalogForm = () => {
       );
   
       if (response.status === 201) {
-        toast.success("Catalog Created successfully", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          style: { backgroundColor: "#009689", color: "#fff" },
-        });
-  
+        toast.success("Catalog Created successfully");
+        setErrorMessage(null)
         
         setFormData({
           productName: "",
           category: "",
           subCategory: "",
-          seller: "",
+        
           iso: "",
           specifications: {},
           createdBy: "",
