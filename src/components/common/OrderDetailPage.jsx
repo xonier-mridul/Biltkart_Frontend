@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
-const OrderDetailPage = ({orderData}) => {
+const OrderDetailPage = ({orderData, user}) => {
 
     const navigate = useNavigate();
   return (
@@ -20,9 +20,9 @@ const OrderDetailPage = ({orderData}) => {
                 <div className='rounded-xl border-zinc-200 border-1 overflow-hidden'>
                     <h2 className='text-center font-semibold bg-green-50 py-2.5 capitalize'>Customer:</h2>
                     <div className='p-4 px-6'> 
-                  <h4 className='capitalize text-lg font-semibold text-green-500'>{orderData.vrfqId?.brfqId?.rfqId?.createdBy?.name || "N/A"}</h4>
-                  <h4 className='font-semibold'>Phone: <span className='font-normal'>{orderData.vrfqId?.brfqId?.rfqId?.createdBy?.number || "N/A"}</span></h4>
-                  <h4 className='font-semibold'>Email: <span className='font-normal'>{orderData.vrfqId?.brfqId?.rfqId?.createdBy?.email || "N/A"}</span></h4>
+                  <h4 className='capitalize text-lg font-semibold text-green-500'>{orderData.vrfqId?.brfqId?.rfqId?.createdBy?.company || "N/A"}</h4>
+                  {(user?.role === "admin") &&<h4 className='font-semibold'>Phone: <span className='font-normal'>{orderData.vrfqId?.brfqId?.rfqId?.createdBy?.number || "N/A"}</span></h4>}
+                  {(user?.role === "admin") &&<h4 className='font-semibold'>Email: <span className='font-normal'>{orderData.vrfqId?.brfqId?.rfqId?.createdBy?.email || "N/A"}</span></h4>}
 
                 </div>
                 </div>
@@ -30,8 +30,8 @@ const OrderDetailPage = ({orderData}) => {
                     <h2 className='text-center font-semibold bg-green-50 py-2.5 capitalize'>Shipped to:</h2>
                     <div className='p-4 px-6'> 
                   <h4 className='capitalize text-lg font-semibold text-green-500'>{orderData.vrfqId?.brfqId?.rfqId?.DeliveryLocation|| "N/A"}</h4>
-                  <h4 className='font-semibold'>Phone: <span className='font-normal'>{orderData.vrfqId?.brfqId?.rfqId?.pinCode || "N/A"}</span></h4>
-                  <h4 className='font-semibold'>Email: <span className='font-normal'>{orderData.vrfqId?.brfqId?.rfqId?.createdBy?.email || "N/A"}</span></h4>
+                 {(user?.role === "admin") && <h4 className='font-semibold'>Supplier: <span className='font-normal capitalize'>{orderData?.supplier?.company || "N/A"}</span></h4>}
+                
 
                 </div>
                 </div>
@@ -40,7 +40,7 @@ const OrderDetailPage = ({orderData}) => {
                     <div className='p-4 px-6'> 
                   <h4 className='capitalize text-lg font-semibold text-green-500'>{orderData.vrfqId?.brfqId?.rfqId?.DeliveryLocation|| "N/A"}</h4>
                   <h4 className='font-semibold'>Phone: <span className='font-normal'>{orderData.vrfqId?.brfqId?.rfqId?.pinCode || "N/A"}</span></h4>
-                  <h4 className='font-semibold'>Email: <span className='font-normal'>{orderData.vrfqId?.brfqId?.rfqId?.createdBy?.email || "N/A"}</span></h4>
+                  
 
                 </div>
                 </div>

@@ -244,7 +244,7 @@ const handleBuyerSelection = (id)=>{
   // Handle Submit
 
   const handleSubmit = async (e) => {
-    setIsLoading(true)
+   
     e.preventDefault();
   
     if(quantitySpread !== "yes"){
@@ -301,6 +301,7 @@ const handleBuyerSelection = (id)=>{
     
   
     try {
+       setIsLoading(true)
       const response = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}new-rfq`,
         formDatas,

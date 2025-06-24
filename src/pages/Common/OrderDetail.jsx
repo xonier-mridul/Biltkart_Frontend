@@ -47,7 +47,7 @@ const OrderDetail = () => {
   return (
     <>
     <div className='p-5 flex flex-col gap-5'>
-      <OrderDetailPage orderData={orderData}/>
+      <OrderDetailPage orderData={orderData} user={user}/>
       <OrderTracking orderData={orderData} id={id} user={user}/>
     </div>
     </>

@@ -110,7 +110,7 @@ const AssignBRFQDetail = ({data}) => {
                       key={variant}
                       className="p-4 border-zinc-200 border text-start text-nowrap"
                     >
-                      {variant}
+                      {variant ? variant : "N/A"}
                     </th>
                   ))}
               </tr>
@@ -125,7 +125,7 @@ const AssignBRFQDetail = ({data}) => {
                   {item.values &&
                     Object?.values(item?.values).map((val, idx) => (
                       <td key={idx} className="p-4 border-zinc-200 border">
-                        {val}
+                        {val ? val : "N/A"}
                       </td>
                     ))}
                 </tr>

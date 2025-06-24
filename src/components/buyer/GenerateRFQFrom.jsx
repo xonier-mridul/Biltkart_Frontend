@@ -10,7 +10,7 @@ import { FaXmark, FaPlus, FaMinus } from "react-icons/fa6";
 
 const GenerateRFQFrom = () => {
   const [errMessage, setErrorMessage] = useState("")
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(2);
   const [categoryData, setCategoryData] = useState([]);
   const [brandData, setBrandData] = useState([]);
   const [agreement, setAgreement] = useState(false);
@@ -355,6 +355,26 @@ const quantitySeparation = () => {
     }
   };
 
+  const downloadExampleSheet = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_SERVER_URL}download/rfq-example-sheet`,
+          {
+            responseType: "blob",
+          }
+        );
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "example_sheet.xlsx");
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
   const toggle = () => {
     setAgreement((prev) => !prev);
   };
@@ -406,15 +426,22 @@ const quantitySeparation = () => {
             />
             <label htmlFor="condition">Are you agree with conditions</label>
           </div>
-          <div>
-            <button
-              disabled={!agreement}
-              className="bg-green-500 disabled:bg-green-300 px-5 py-2 rounded-lg text-white flex items-center gap-2 cursor-pointer"
-              onClick={downloadSpecSheet}
-            >
-              Download <FaDownload />
-            </button>
-          </div>
+          <div className="flex items-center gap-5">
+                     <button
+                       disabled={!agreement}
+                       className="bg-emerald-600 disabled:bg-emerald-300 px-5 py-2 rounded-lg text-white flex items-center gap-2 cursor-pointer"
+                       onClick={downloadSpecSheet}
+                     >
+                       Download Sheet <FaDownload />
+                     </button>
+                     <button
+                        disabled={!agreement}
+                       className="bg-emerald-100 disabled:bg-emerald-100 px-5 py-2 rounded-lg text-emerald-600 disabled:text-emerald-400 flex items-center gap-2 cursor-pointer"
+                       onClick={downloadExampleSheet}
+                     >
+                       Download Example Sheet <FaDownload />
+                     </button>
+                   </div>
         </div>
       )}
 
@@ -427,7 +454,7 @@ const quantitySeparation = () => {
           </h2>
 
           <ul className="flex gap-4 justify-start items-center ">
-            <li
+            {/* <li
               className={`${
                 active === 1
                   ? " border-solid border-b-emerald-500 border-b-4"
@@ -436,7 +463,7 @@ const quantitySeparation = () => {
               onClick={() => setActive(1)}
             >
               Upload Request file
-            </li>
+            </li> */}
             <li
               className={`${
                 active === 2

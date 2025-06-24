@@ -242,6 +242,7 @@ const router = createBrowserRouter(
         </Route>
         <Route path="order" element={<NewOrderOutlet/>}>
            <Route index element={<BuyerOrder/>}/>
+           <Route path="order-detail/:id" element={<OrderDetail/>} />
         </Route>
         <Route path="order-history" element={<NewOrderOutlet/>}>
            <Route index element={<BuyerOrderHistory/>}/>

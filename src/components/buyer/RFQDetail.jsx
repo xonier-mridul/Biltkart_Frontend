@@ -293,7 +293,7 @@ const RFQDetail = () => {
                   {item.values &&
                     Object?.values(item?.values).map((val, idx) => (
                       <td key={idx} className="p-4 border-zinc-200 border">
-                        {val}
+                        {val ?  val : "N/A"}
                       </td>
                     ))}
                 </tr>
