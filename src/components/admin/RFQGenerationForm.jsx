@@ -371,10 +371,10 @@ const handleBuyerSelection = (id)=>{
     }
   };
 
-  const downloadDetailSpecSheet = async () => {
+  const downloadExampleSheet = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_SERVER_URL}download/rfq-detail-sheet`,
+        `${import.meta.env.VITE_SERVER_URL}download/rfq-example-sheet`,
         {
           responseType: "blob",
         }
@@ -382,7 +382,7 @@ const handleBuyerSelection = (id)=>{
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", "specification.xlsx");
+      link.setAttribute("download", "example_sheet.xlsx");
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -421,20 +421,20 @@ const handleBuyerSelection = (id)=>{
             <h2 className="text-xl font-bold">
               Excel File data fill condition
             </h2>
-            <span
-              className="absolute top-3 right-3 cursor-pointer"
+            <button
+              className="absolute top-3.5 right-3.5 cursor-pointer transition-all duration-300 hover:rotate-90 hover:text-emerald-600"
               onClick={() => setDownloadConditionPopup(false)}
             >
               <FaXmark className="text-2xl" />
-            </span>
+            </button>
           </div>
           <ul className="flex flex-col gap-3">
             <li className="flex items-center gap-3">
-              <FaStarOfLife className="text-[12px] text-orange-500" /> Make sure
+              <FaStarOfLife className="text-[12px] text-emerald-500" /> Make sure
               filled field as per Specified Parameters.
             </li>
-            <li className="flex items-center gap-3">
-              <FaStarOfLife className="text-[12px] text-orange-500" /> Please
+            <li className="flex items-center justify-start gap-3">
+              <FaStarOfLife className="text-[12px] text-emerald-500" /> Please
               make sure do not escape any empty assigned row & column, if you
               don't have data fill. <span className="font-semibold">"N/A"</span>{" "}
             </li>
@@ -449,13 +449,20 @@ const handleBuyerSelection = (id)=>{
             />
             <label htmlFor="condition">Are you agree with conditions</label>
           </div>
-          <div>
+          <div className="flex items-center gap-5">
             <button
               disabled={!agreement}
-              className="bg-orange-500 disabled:bg-orange-300 px-5 py-2 rounded-lg text-white flex items-center gap-2 cursor-pointer"
+              className="bg-emerald-600 disabled:bg-emerald-300 px-5 py-2 rounded-lg text-white flex items-center gap-2 cursor-pointer"
               onClick={downloadSpecSheet}
             >
-              Download <FaDownload />
+              Download Sheet <FaDownload />
+            </button>
+            <button
+               disabled={!agreement}
+              className="bg-emerald-100 disabled:bg-emerald-100 px-5 py-2 rounded-lg text-emerald-600 disabled:text-emerald-400 flex items-center gap-2 cursor-pointer"
+              onClick={downloadExampleSheet}
+            >
+              Download Example Sheet <FaDownload />
             </button>
           </div>
         </div>
