@@ -20,7 +20,6 @@ const Assign = () => {
             if(response.status === 200){
                 setBRFQData(response.data?.brfq);
                
-                
             }
         } catch (error) {
             console.error(error)

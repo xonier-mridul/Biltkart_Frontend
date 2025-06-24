@@ -97,17 +97,7 @@ const ProductListTable = () => {
         `${import.meta.env.VITE_SERVER_URL}catalog/${id}`
       );
       if (response.status === 200) {
-        toast.success("Product deleted successfully", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          style: { backgroundColor: "#009689", color: "#fff" },
-        });
+        toast.success("Product deleted successfully");
         setFilteredData(filteredData.filter((item) => item._id !== id));
         setShowDeletePopup(false)
       }
@@ -247,15 +237,15 @@ const ProductListTable = () => {
                   >
                     <td className="p-4 border-zinc-200 border-l-1">
                       
-                     <span className="capitalize"> {item.seller?.company} </span>
+                     <Link to={`/admin/user-profile/${item?.createdBy?._id}`} className="capitalize hover:text-green-500 transition-all duration-300">  {item.createdBy?.company || "N/A"} </Link>
                     </td>
                     <td className="p-4 border-zinc-200 border-l-1">
                       {" "}
-                      {item.category.category}{" "}
+                      {item.category.category || "N/A" }{" "}
                     </td>
                     <td className="p-4 border-zinc-200 border-l-1">
                       {" "}
-                      {item.subCategory.name}{" "}
+                      {item.subCategory.name || "N/A"}{" "}
                     </td>
                     <td className="p-4 border-zinc-200 border-l-1">
                       <span
@@ -265,7 +255,7 @@ const ProductListTable = () => {
                             : "text-red-500 bg-red-50"
                         } capitalize  py-2 px-4 rounded-lg  font-semibold`}
                       >
-                        {item.iso}
+                        {item.iso || "N/A"}
                       </span>
                     </td>
                     <td className="p-4 border-zinc-200 border-l-1">

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 // Media
 import { FaEye, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
-const RFQListTable = ({ rfqData, setRfqData, totalPages }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const RFQListTable = ({ rfqData, setRfqData, totalPages, handlePageChange, currentPage }) => {
+  
   const [buyerUser, setBuyerUser] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBuyer, setSelectedBuyer] = useState("all");
@@ -57,11 +57,7 @@ const RFQListTable = ({ rfqData, setRfqData, totalPages }) => {
     setSelectedProcess(e.target.value);
   };
 
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
+ 
 
   const filteredData = getFilteredData();
 
@@ -116,14 +112,14 @@ const RFQListTable = ({ rfqData, setRfqData, totalPages }) => {
           </tr>
         </thead>
         <tbody>
-          {filteredData?.map((item) => {
+          {filteredData.length > 0 ? filteredData?.map((item) => {
             return (
               <tr
                 key={item._id}
                 className="border-b-[1px] border-l-1 border-zinc-200"
               >
-                <td className="p-4 border-l-1 border-neutral-200 text-sm">{item?._id}</td>
-                <td className="p-4 border-l-1 border-neutral-200 capitalize">{item.createdBy?.name}</td>
+                <td className="p-4 border-l-1 border-neutral-200 text-sm"><Link className="hover:text-green-500 transition-all tracking-wide" to={`rfq-detail/${item._id}`}>{item?._id} </Link></td>
+                <td className="p-4 border-l-1 border-neutral-200 capitalize"><Link to={`/admin/user-profile/${item?.createdBy?._id}`} className="hover:text-green-500 transition-all"> {item.createdBy?.name} </Link></td>
                 <td className="p-4 border-l-1 border-neutral-200 capitalize">{item?.product}</td>
                 <td className="p-4 border-l-1 border-neutral-200 capitalize">
                   <span
@@ -147,17 +143,21 @@ const RFQListTable = ({ rfqData, setRfqData, totalPages }) => {
                     >
                       <FaEye className="text-xl" />
                     </button>
-                    <button
+                    {(item.status !== true) && <button
                       className="rounded-lg bg-lime-500 px-2 py-2 text-white"
                       onClick={() => navigate(`update-rfq/${item._id}`)}
                     >
                       <MdEdit className="text-xl" />
-                    </button>
+                    </button>}
                   </div>
                 </td>
               </tr>
             );
-          })}
+          }): (
+            <tr>
+              <td colSpan={6} className="p-4 text-center"> Data not found</td>
+            </tr>
+          )}
         </tbody>
       </table>
 

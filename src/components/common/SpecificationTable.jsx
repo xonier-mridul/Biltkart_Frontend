@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 // Media Start
 import { MdEdit, MdDelete } from "react-icons/md";
-import { FaXmark } from "react-icons/fa6";
+import { FaXmark, FaPlus, FaHouseMedicalCircleExclamation } from "react-icons/fa6";
 import { FaEye, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 // Media End
 
@@ -21,6 +21,7 @@ const SpecificationTable = () => {
   const [formData, setFormData] = useState({
     name: "",
     category: "",
+    names: []
   });
 
   const isMounted = useRef(true);
@@ -101,19 +102,10 @@ const length = filteredData.length;
         setFormData({
           name: "",
           category: "",
+          names:null
         });
         setShowModal(false);
-        toast.success("Specification created successfully", {
-          position: "top-right",
-          autoClose: 3200,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          style: { backgroundColor: "#009689", color: "#fff" },
-        });
+        toast.success("Specification created successfully");
       }
     } catch (error) {
       console.error(error.message);
@@ -124,6 +116,8 @@ const length = filteredData.length;
 
   const handleDelete = async (id) => {
     try {
+      const confirm = window.confirm("Are you sure to delete")
+      if(!confirm) return
       const response = await axios.delete(
         `${import.meta.env.VITE_SERVER_URL}specification/${id}`,
         {
@@ -134,33 +128,14 @@ const length = filteredData.length;
       );
 
       if (response.status === 200) {
-        toast.success("Specification deleted successfully", {
-          position: "top-right",
-          autoClose: 3200,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          style: { backgroundColor: "#009689", color: "#fff" },
-        });
+        toast.success("Specification deleted successfully");
         setSpecificationData(
           specificationData.filter((item) => item._id !== id)
         );
       }
     } catch (error) {
       console.error(error.message);
-      toast.error("Specification not deleted", {
-        position: "top-right",
-        autoClose: 3200,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      toast.error("Specification not deleted");
     }
   };
 
@@ -197,9 +172,7 @@ const length = filteredData.length;
         `${import.meta.env.VITE_SERVER_URL}specification/${updatedId}`,
         formData,
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          withCredentials: true
         }
       );
 
@@ -210,30 +183,11 @@ const length = filteredData.length;
           name: "",
           category: "",
         });
-        toast.success("Specification updated successfully", {
-          position: "top-right",
-          autoClose: 3200,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          style: { backgroundColor: "#009689", color: "#fff" },
-        });
+        toast.success("Specification updated successfully");
       }
     } catch (error) {
       console.error(error.message);
-      toast.error("Specification not updated", {
-        position: "top-right",
-        autoClose: 3200,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      toast.error("Specification not updated");
     }
   };
 
@@ -244,6 +198,15 @@ const length = filteredData.length;
       return setCurrentPage(no);
     }
   };
+
+  const handleAddSpec = ()=>{
+    if(formData.names.includes(formData.name)) return setFormData({...formData, name:""})
+    setFormData((prev)=>({...formData, names:[...prev.names, formData.name], name:""}))
+  }
+
+  const handleRemoveSpec = (i)=>{
+    setFormData((prev)=>({...formData, names:[...prev.names.filter((_,ind)=> ind !== i )]}))
+  }
 
   return (
     <>
@@ -341,7 +304,7 @@ const length = filteredData.length;
             <FaXmark className="text-2xl" />{" "}
           </span>
           <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-            <div className="flex items-center gap-5">
+            <div className="flex items-start gap-5">
               <div className="flex w-1/2 flex-col gap-3">
                 <label className="text-lg" htmlFor="category">
                   {" "}
@@ -367,20 +330,27 @@ const length = filteredData.length;
                   {" "}
                   Add Specification{" "}
                 </label>
+                <div className="w-full border-1 border-zinc-200 outline-none p-3 rounded-lg flex items-center">
                 <input
-                  className="w-full border-1 border-zinc-200 outline-none p-3 rounded-lg"
+                  className="w-full outline-none"
                   type="text"
                   name="name"
                   id="name"
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Add Specification"
-                />
+                /> <span className=" text-emerald-600 text-lg cursor-pointer hover:rotate-90 transition-all duration-300" onClick={handleAddSpec}><FaPlus /></span> </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  {formData?.names?.map((item, i)=>(
+                    <span className="anime-bg px-3 py-1.5 text-sm flex items-center gap-2">{item} <FaXmark className="text-lg cursor-pointer hover:rotate-90 transition-all duration-300" onClick={()=>handleRemoveSpec(i)}/> </span>
+                  ))}
+                </div>
               </div>
             </div>
             <div className="flex justify-end">
               <button
-                className="capitalize font-bold flex items-center gap-3 rounded-lg bg-teal-600 px-7 py-3 text-white w-fit cursor-pointer"
+              disabled={formData.category === "" }
+                className="capitalize font-bold flex items-center gap-3 rounded-lg bg-teal-600 px-7 py-3 text-white w-fit cursor-pointer disabled:bg-teal-400"
                 type="submit"
               >
                 {" "}

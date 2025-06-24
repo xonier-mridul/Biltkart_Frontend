@@ -16,6 +16,7 @@ import { RiContactsBook3Fill } from "react-icons/ri";
 import { BsFillChatRightQuoteFill } from "react-icons/bs";
 import { FaAngleDown, FaShopLock } from "react-icons/fa6";
 import LogoutPopup from "../../components/common/LogoutPopup";
+import { IoLogOutOutline } from "react-icons/io5";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -263,12 +264,17 @@ const Admin = () => {
                     Send BRFQ
                   </Link>
                 </li>
+                <li>
+                  <Link to={"approved-brfq"} className="capitalize text-xl ">
+                    Approved BRFQ
+                  </Link>
+                </li>
                 {/* <li>
                   <Link to={""} className="capitalize text-xl ">
                     Track BRFQ
                   </Link>
                 </li> */}
-             
+               
               </ul>
             </li>
             <li className="">
@@ -311,11 +317,11 @@ const Admin = () => {
                     Compare Quotation
                   </Link>
                 </li>
-                {/* <li>
-                  <Link to={""} className="capitalize text-xl ">
-                    Track VRFQ
+                <li>
+                  <Link to={"approved-vrfq"} className="capitalize text-xl ">
+                    Approved VRFQ
                   </Link>
-                </li> */}
+                </li>
                 {/* <li>
                   <Link to={""} className="capitalize text-xl ">
                    VRFQ Evaluation
@@ -359,7 +365,7 @@ const Admin = () => {
               >
                 <li>
                   <Link to={"create-rfq"} className="capitalize text-xl ">
-                    category
+                    Create RFQ
                   </Link>
                 </li>
                 
@@ -547,7 +553,7 @@ const Admin = () => {
                 {" "}
                 <span className="bg-emerald-500 tabs-icon text-white h-8 w-8 min-w-8 rounded-full flex justify-center items-center ">
                   {" "}
-                  <RiContactsBook3Fill className="text-xl" />
+                  <IoLogOutOutline className="text-xl" />
                 </span>{" "}
                 <span
                   className={`${

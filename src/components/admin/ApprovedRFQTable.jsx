@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 import axios from "axios";
 
@@ -69,10 +69,10 @@ const ApprovedRFQTable = ({ rfqData }) => {
                   className="border-b-[1px] border-l-1 border-zinc-200"
                 >
                   <td className="p-4 border-l-1 border-neutral-200 text-sm">
-                    {item?._id}
+                   <Link className="hover:text-green-500 transition-all tracking-wide" to={`rfq-detail/${item._id}`}>{item?._id}</Link> 
                   </td>
                   <td className="p-4 border-l-1 border-neutral-200 capitalize">
-                    {item.createdBy?.name}
+                  <Link to={`/admin/user-profile/${item?.createdBy?._id}`} className="hover:text-green-500 transition-all">  {item.createdBy?.name} </Link>
                   </td>
                   <td className="p-4 border-l-1 border-neutral-200 capitalize">
                     {item?.product}
@@ -104,12 +104,12 @@ const ApprovedRFQTable = ({ rfqData }) => {
                       >
                         <FaEye className="text-xl" />
                       </button>
-                      <button
+                      {item.status !== true && <button
                         className="rounded-lg bg-lime-500 px-2 py-2 text-white"
                         onClick={() => navigate(`update-rfq/${item._id}`)}
                       >
                         <MdEdit className="text-xl" />
-                      </button>
+                      </button>}
                     </div>
                   </td>
                 </tr>

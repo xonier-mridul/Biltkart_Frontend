@@ -5,11 +5,12 @@ import axios from 'axios'
 const RFQList = () => {
     const [rfqData, setRfqData] = useState([])
     const [totalPages, setTotalPages] = useState(1)
+    const [currentPage, setCurrentPage] = useState(1);
 
 
     const getRfq = async()=>{
        try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}new-rfq/all`, {withCredentials: true});
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}new-rfq/get-pending?page=${currentPage}`, {withCredentials: true});
         if(response.status === 200){
             setRfqData(response.data?.rfqList);
             setTotalPages(response.data?.totalPages)
@@ -20,14 +21,20 @@ const RFQList = () => {
        }
     }
 
+     const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
     useEffect(() => {
       getRfq()
-    }, [])
+    }, [currentPage])
     
   return (
     <>
       <div className='p-5 flex flex-col gap-5'>
-        <RFQListTable rfqData={rfqData} setRfqData={setRfqData} totalPages={totalPages}/>
+        <RFQListTable rfqData={rfqData} setRfqData={setRfqData} totalPages={totalPages} handlePageChange={handlePageChange} currentPage={currentPage}/>
       </div>
     </>
   )

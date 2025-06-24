@@ -170,13 +170,12 @@ const CompareQuotationComponent = ({ vrfqData, brfqData, supplierData, getVRFQ})
           <table className="w-full border border-zinc-200">
             <thead>
               <tr className="bg-slate-100 border-b border-zinc-200">
-                <th className="p-4 text-start uppercase">Vendor ID</th>
+                <th className="p-4 text-start uppercase">VRFQ ID</th>
+                <th className="p-4 text-start uppercase order-l border-zinc-200">Vendor ID</th>
                 <th className="p-4 text-start border-l border-zinc-200">
                   VRFQ Price (₹)
                 </th>
-                <th className="p-4 text-start border-l border-zinc-200">
-                  Payment Terms
-                </th>
+                
                 <th className="p-4 text-start border-l border-zinc-200">
                   Comments
                 </th>
@@ -192,7 +191,8 @@ const CompareQuotationComponent = ({ vrfqData, brfqData, supplierData, getVRFQ})
                     className="border-b border-stone-200 relative"
                     key={item._id}
                   >
-                    <td className="p-4">{item?.createdBy?._id || "N/A"}</td>
+                    <td className="p-4 text-sm">{item?._id || "N/A"}</td>
+                    <td className="p-4 border-l border-stone-200 text-sm">{item?.createdBy?._id || "N/A"}</td>
                     <td className="p-4 border-l border-stone-200 font-medium">
                       <span className="px-4 tracking-wide py-1.5 text-sm bg-green-500 text-white rounded-lg">
                         ₹{" "}
@@ -205,9 +205,7 @@ const CompareQuotationComponent = ({ vrfqData, brfqData, supplierData, getVRFQ})
                         ) || "N/A"}
                       </span>
                     </td>
-                    <td className="p-4 border-l border-stone-200">
-                      {item?.paymentTerms || "N/A"}
-                    </td>
+                   
                     <td className="p-4 border-l border-stone-200">
                       <span
                         className="h-8 w-8 flex justify-center items-center text-white bg-emerald-500 hover:bg-emerald-600 hover:scale-105 transition-all duration-300 rounded-lg cursor-pointer"
@@ -270,7 +268,7 @@ const CompareQuotationComponent = ({ vrfqData, brfqData, supplierData, getVRFQ})
           <p className="text-red-500">{errorMsg}</p>
         </div>
         <div className="p-4 px-7 flex justify-end">
-             <button className="px-7 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white cursor-pointer hover:scale-105 transition-all duration-300" onClick={()=>navigate(-1)}> Back</button>
+             <button className="px-7 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white cursor-pointer hover:scale-105 transition-all duration-300" onClick={()=>navigate(-1)}>Back</button>
         </div>
       </div>
     </>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import {useNavigate } from "react-router-dom"
+import {Link, useNavigate } from "react-router-dom"
 
 
 import { FaEye, FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -54,9 +54,9 @@ const length = filteredData.length;
                 <th className="p-4 text-start border-l-1 border-zinc-200">
                   Item
                 </th>
-                <th className="p-4 text-start border-l-1 border-zinc-200">
+                {/* <th className="p-4 text-start border-l-1 border-zinc-200">
                   Status
-                </th>
+                </th> */}
                 <th className="p-4 text-start border-l-1 border-zinc-200">
                   From Date
                 </th>
@@ -68,12 +68,12 @@ const length = filteredData.length;
             <tbody>
               {length>0 ?filteredData.map((item)=>(
                 <tr key={item._id} className="border-b-1 border-zinc-200">
-                  <td className="p-3 px-4">{item._id || "N/A"}</td>
+                  <td className="p-3 px-4"><Link to={`order-detail/${item._id}`} className="hover:text-green-500 transition-all duration-300"> {item._id || "N/A"} </Link></td>
                   <td className="p-3 px-4 border-l-1 border-zinc-200"><span className="capitalize">{item.vrfqId?.brfqId?.rfqId?.product || "N/A"}</span></td>
-                  <td className="p-3 px-4 border-l-1 border-zinc-200"><span className="capitalize text-nowrap">{item.vrfqId?.brfqId?.rfqId?.createdBy?.name || "N/A"}</span></td>
-                  <td className="p-3 px-4 border-l-1 border-zinc-200 text-nowrap"><span className="capitalize">{item.vrfqId?.brfqId?.rfqId?.quantity || "N/A"}({item.vrfqId?.brfqId?.rfqId?.measurement})</span></td>
-                  <td className="p-3 px-4 border-l-1 border-zinc-200"> <span className={` ${item.process === "confirmed" && "bg-emerald-600"} ${item.process === "processing" && "bg-orange-500"} ${item.process === "dispatch" && "bg-orange-500"} ${item.process === "shipped" && "bg-green-500"} capitalize bg-black px-4 py-2 rounded-lg text-sm text-white `}>{item.process || "N/A"}</span></td>
-                  <td className="p-3 px-4 border-l-1 border-zinc-200"> <span className={`  capitalize bg-green-50 text-green-500 px-4 py-2 rounded-lg text-sm  `}>{new Date(item.vrfqId?.brfqId?.rfqId?.fromDate).toLocaleDateString() || "N/A"}</span></td>
+                  <td className="p-3 px-4 border-l-1 border-zinc-200"><Link to={`/admin/user-profile/${item.vrfqId?.brfqId?.rfqId?.createdBy?._id}`} className="capitalize text-nowrap hover:text-green-500 transition-all duration-300">{item.vrfqId?.brfqId?.rfqId?.createdBy?.company || "N/A"}</Link></td>
+                  <td className="p-3 px-4 border-l-1 border-zinc-200 text-nowrap"><span className="capitalize">{item.vrfqId?.brfqId?.rfqId?.quantity || "N/A"} <span className="bg-orange-100 px-2 py-1 rounded-lg text-orange-500 text-[12px]"> ({item.vrfqId?.brfqId?.rfqId?.measurement}) </span></span></td>
+                  {/* <td className="p-3 px-4 border-l-1 border-zinc-200"> <span className={` ${item.process === "confirmed" && "bg-emerald-600"} ${item.process === "processing" && "bg-orange-500"} ${item.process === "dispatch" && "bg-orange-500"} ${item.process === "shipped" && "bg-green-500"} capitalize bg-black px-4 py-2 rounded-lg text-sm text-white `}>{item.process || "N/A"}</span></td> */}
+                  <td className="p-3 px-4 border-l-1 border-zinc-200"> <span className={` capitalize bg-green-50 text-green-500 px-4 py-2 rounded-lg text-sm  `}>{new Date(item.vrfqId?.brfqId?.rfqId?.fromDate).toLocaleDateString() || "N/A"}</span></td>
                   <td className="p-3 px-4 border-l-1 border-zinc-200"> <div className="flex items-center justify-center gap-3">
                     <button type="button" className="bg-green-500 text-white h-8 w-8 rounded-lg flex justify-center items-center" onClick={()=>navigate(`order-detail/${item._id}`)}> <FaEye className="text-lg" /></button>  </div> </td>
                 </tr>

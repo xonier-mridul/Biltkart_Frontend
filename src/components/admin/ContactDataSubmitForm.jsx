@@ -70,7 +70,7 @@ const ContactDataSubmitForm = ({getContactData}) => {
   return (
     <>
       <ToastContainer />
-      <div className="bg-white w-full border-2 border-orange-500 rounded-4xl">
+      <div className="bg-white w-full border-2 border-emerald-500 rounded-4xl">
         <h3 className="text-[20px] font-semibold p-9 py-6 border-b-1 border-zinc-200">
           Fill the form
         </h3>
@@ -102,7 +102,7 @@ const ContactDataSubmitForm = ({getContactData}) => {
           <button
           disabled={!formData.email || !formData.location || !formData.number}
             type="submit"
-            className="rounded-lg bg-orange-500 disabled:bg-orange-300 px-6 py-3 text-white w-fit cursor-pointer">
+            className="rounded-lg bg-emerald-500 disabled:bg-emerald-300 px-6 py-3 text-white w-fit cursor-pointer">
             Save
           </button>
           </div>

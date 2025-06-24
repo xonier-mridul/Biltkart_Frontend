@@ -37,16 +37,7 @@ const ContactDataTable = ({ contactData, setContactData, getContactData }) => {
       }
     } catch (error) {
       console.error(error.message);
-      toast.error("Contact data deleted successfully", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      toast.error("Contact data deleted successfully");
     }
   };
 
@@ -55,37 +46,18 @@ const ContactDataTable = ({ contactData, setContactData, getContactData }) => {
        const response = await axios.patch(`${import.meta.env.VITE_SERVER_URL}admin-contact/${id}`);
        if(response.status === 200){
         getContactData()
-        toast.success("Active status updated successfully", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          style: { backgroundColor: "#009689", color: "#fff" },
-        });
+        toast.success("Active status updated successfully");
        }
    } catch (error) {
     console.error(error);
-    toast.error("Contact data deleted successfully", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
+    toast.error("Contact data deleted successfully");
    }
   }
 
   return (
     <>
       <ToastContainer />
-      <div className="bg-white shadow-lg rounded-2xl m-5 border-2 border-orange-500">
+      <div className="bg-white shadow-lg rounded-2xl  border-2 border-emerald-500">
         <table className="w-full border-[1px] border-zinc-200 rounded-2xl overflow-hidden">
           <thead>
             <tr className="bg-slate-100 border-b-1 border-zinc-200">

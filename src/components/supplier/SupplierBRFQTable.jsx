@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { MdEdit, MdDelete } from "react-icons/md";
 import {
@@ -43,7 +43,7 @@ const SupplierBRFQTable = ({assignBRFQ}) => {
         <tr className="bg-slate-100">
               <th className="p-4 text-start">BRFQ ID</th>
               <th className="p-4 text-start border-l-1 border-[#f1f1f1]">
-              Product Name
+              Product
               </th>
               <th className="p-4 text-start border-l-1 border-[#f1f1f1]">
                 Quantity
@@ -54,9 +54,7 @@ const SupplierBRFQTable = ({assignBRFQ}) => {
               <th className="p-4 text-start border-l-1 border-[#f1f1f1]">
                 Delivery Date
               </th>
-              <th className="p-4 text-start border-l-1 border-[#f1f1f1]">
-                Status
-              </th>
+              
               <th className="p-4 text-start border-l-1 border-[#f1f1f1]">
                 Action
               </th>
@@ -68,12 +66,11 @@ const SupplierBRFQTable = ({assignBRFQ}) => {
              
             return(
             <tr className='border-[#f1f1f1] border-b-1' key={item._id}>
-              <td className='p-4 text-start '>{item.brfqId?._id}</td>
-              <td className='p-4 border-l-1 border-[#f1f1f1] text-start'> <span className='capitalize'>{item.brfqId?.rfqId?.product}</span></td>
-              <td className='p-4 border-l-1 border-[#f1f1f1] text-start'>{item.brfqId?.rfqId?.quantity} ({item.brfqId?.rfqId?.measurement})</td>
+              <td className='p-4 text-start '> <Link to={`detail/${item._id}`} className='hover:text-green-500 transition-all duration-300 text-sm'> {item.brfqId?._id} </Link></td>
+              <td className='p-4 border-l-1 border-[#f1f1f1] text-start'> <span className='capitalize bg-green-100 px-4 py-1 rounded-lg text-green-600 text-sm tracking-wide'>{item.brfqId?.rfqId?.product}</span></td>
+              <td className='p-4 border-l-1 border-[#f1f1f1] text-start text-nowrap' >{item.brfqId?.rfqId?.quantity} <span className='bg-orange-500 px-2 tracking-wide py-0.5 rounded-lg text-white text-[12px] text-nowrap'>({item.brfqId?.rfqId?.measurement})</span></td>
               <td className='p-4 border-l-1 border-[#f1f1f1] text-start'>{item.brfqId?.rfqId?.DeliveryLocation}</td>
               <td className='p-4 border-l-1 border-[#f1f1f1] text-start'> { new Date(item.brfqId?.rfqId?.spreadQuantityData[0].fromDate).toLocaleDateString()} </td>
-              <td className='p-4 border-l-1 border-[#f1f1f1] text-start'> {item.status === true ? "True" : "False"} </td>
               <td className='p-4 border-l-1 border-[#f1f1f1] text-start'> 
               <div className="flex items-center gap-4">
                     <button
@@ -82,12 +79,12 @@ const SupplierBRFQTable = ({assignBRFQ}) => {
                     >
                       <FaEye className="text-xl" />
                     </button>
-                    <button
+                    {item.process === "send to suppliers" && <button
                       className="rounded-lg bg-lime-500 px-2 py-2 text-white hover:scale-105 cursor-pointer transition-all duration-300"
                       onClick={()=> navigate(`add-quotation/${item._id}`)}
                     >
                       <MdEdit className="text-xl" />
-                    </button>
+                    </button>}
                   </div>
               </td>
             </tr>)

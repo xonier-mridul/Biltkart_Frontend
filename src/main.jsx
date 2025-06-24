@@ -105,6 +105,8 @@ import AddSupplier from "./pages/admin/AddSupplier.jsx";
 import CreateRFQbyAdmin from "./pages/admin/CreateRFQbyAdmin.jsx";
 import AdminCatalog from "./pages/admin/AdminCatalog.jsx";
 import SupplierProductList from "./pages/admin/SupplierProductList.jsx";
+import ApprovedBRFQ from "./pages/admin/ApprovedBRFQ.jsx";
+import ApprovedVRFQ from "./pages/admin/ApprovedVRFQ.jsx";
 
 
 
@@ -190,10 +192,19 @@ const router = createBrowserRouter(
           <Route path="assign/:id" element={<Assign/>} />
           <Route path="detail/:id" element={<BRFQDetail/>} />
         </Route>
+        <Route path="approved-brfq" element={<CommonOutlet/>}>
+           <Route index element={<ApprovedBRFQ/>}/>
+            <Route path="assign/:id" element={<Assign/>} />
+          <Route path="detail/:id" element={<BRFQDetail/>} />
+        </Route>
         <Route path="vrfq" element={<VRFQOutlet/>}>
            <Route index element={<VRFQPage/>} />
            <Route path="vrfq-detail/:id" element={<VRFQDetailPage/>} />
            <Route path="compare-quotation" element={<CompareQuotation/>}/>
+        </Route>
+        <Route path="approved-vrfq" element={<CommonOutlet/>}>
+          <Route index element={<ApprovedVRFQ/>} />
+          <Route path="vrfq-detail/:id" element={<VRFQDetailPage/>} />
         </Route>
         <Route path="product-list" element={<ProductListOutlet />}>
           <Route index element={<ProductList />} />

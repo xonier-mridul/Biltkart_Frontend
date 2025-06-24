@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import axios from 'axios';
 
 
-import { FaArrowLeft } from "react-icons/fa6";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 
@@ -55,11 +55,23 @@ const SupplierAdminHeader = () => {
   return (
     <div className=' backdrop-blur-xl bg-transparent w-full  flex justify-between items-center p-3 px-6 '>
          <div className='flex items-center gap-5'>
-            <h2 className='text-2xl font-bold capitalize'> {Pathname} </h2>
+            <h2 className='text-2xl font-bold capitalize w-50 truncate'> {Pathname} </h2>
+             <div className="flex items-center gap-4 ">
+                        <button
+                          className="h-9 w-9 rounded-full flex justify-center items-center border-2 border-teal-600 text-teal-600 cursor-pointer hover:bg-teal-600 hover:text-white transition-all duration-300"
+                          onClick={() => Navigate(-1)}
+                        >
+                          <FaArrowLeft />
+                        </button>
+                        <button
+                          className="h-9 w-9 rounded-full flex justify-center items-center border-2 border-teal-600 text-teal-600 cursor-pointer hover:bg-teal-600 hover:text-white transition-all duration-300"
+                          onClick={() => Navigate(1)}
+                        >
+                          <FaArrowRight />
+                        </button>
+                      </div>
 
-            <div className='flex items-center gap-2 '>
-               <button className='h-9 w-9 rounded-full flex justify-center items-center'><FaArrowLeft /></button>
-            </div>
+           
          </div>
          <div className='flex justify-end items-center gap-6'>
              <div className='relative' onMouseEnter={()=>setShowNotification(true)} onMouseLeave={()=>setShowNotification(false)}>

@@ -9,10 +9,12 @@ const UserProfiles = () => {
     const [currentOrder, setCurrentOrder] = useState(0)
     const [buyerOrderDeliveredCount, setBuyerOrderDeliveredCount] = useState(0)
     const [buyerOrderCount, setBuyerOrderCount] = useState(0)
+    const [isLoading, setIsLoading] = useState(false)
 
    const {id} = useParams()
 
    const getUserProfileData = async()=>{
+    setIsLoading(true)
     try{
       const response = await api.get(`/user/byid/${id}`, {withCredentials: true})
       if(response.status === 200){
@@ -21,6 +23,10 @@ const UserProfiles = () => {
     }
     catch(err){
         console.log(err)
+    }
+    finally{
+      setIsLoading(false)
+     
     }
    }
 
@@ -52,7 +58,7 @@ const UserProfiles = () => {
       const response = await api.get(`/order/buyer-order-count-id/${id}`, {withCredentials: true})
       if(response.status === 200){
          setBuyerOrderCount(response?.data?.count)
-         console.log('buyer order count', response.data?.count)
+         
       }
     } catch (error) {
       console.error(error)
@@ -69,7 +75,7 @@ const UserProfiles = () => {
   return (
     <>
       <div className='p-5 flex flex-col gap-5'>
-       <UserProfileComponent userData={userData} currentOrder={currentOrder} buyerOrderDeliveredCount={buyerOrderDeliveredCount} buyerOrderCount={buyerOrderCount}/>
+       <UserProfileComponent userData={userData} currentOrder={currentOrder} buyerOrderDeliveredCount={buyerOrderDeliveredCount} buyerOrderCount={buyerOrderCount} isLoading={isLoading}/>
       </div>
     </>
   )

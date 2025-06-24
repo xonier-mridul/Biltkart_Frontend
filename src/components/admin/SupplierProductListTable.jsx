@@ -105,9 +105,9 @@ const SupplierProductListTable = ({
               {filteredData.length > 0 ? (
                 filteredData.map((item) => (
                   <tr key={item._id} className="border-b border-zinc-200">
-                    <td className="p-4 capitalize ">{item.seller?.company}</td>
-                    <td className="p-4 capitalize border-l-1 border-zinc-200">{item.category?.category}</td>
-                    <td className="p-4 capitalize border-l-1 border-zinc-200">{item.subCategory?.name}</td>
+                    <td className="p-4 capitalize ">{item?.createdBy?.company || "N/A"}</td>
+                    <td className="p-4 capitalize border-l-1 border-zinc-200">{item.category?.category || "N/A"}</td>
+                    <td className="p-4 capitalize border-l-1 border-zinc-200">{item.subCategory?.name || "N/A"}</td>
                     <td className="p-4 border-l-1 border-zinc-200">
                       <span
                         className={`py-2 px-4 rounded-lg font-semibold capitalize ${
@@ -116,7 +116,7 @@ const SupplierProductListTable = ({
                             : 'text-red-500 bg-red-50'
                         }`}
                       >
-                        {item.iso}
+                        {item.iso || "N/A"}
                       </span>
                     </td>
                     <td className="p-4 border-l-1 border-zinc-200">

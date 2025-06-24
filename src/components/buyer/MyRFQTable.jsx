@@ -159,13 +159,13 @@ const MyRFQTable = () => {
                       >
                         <FaEye className="text-xl" />
                       </button>
-                      <button
+                      {/* <button
                         type="button"
                         className="rounded-lg bg-lime-500 px-2 py-2 text-white cursor-pointer"
                         onClick={()=>navigate()}
                       >
                         <MdEdit className="text-xl" />
-                      </button>
+                      </button> */}
                       <button
                         type="button"
                         className="rounded-lg bg-red-500 px-2 py-2 text-white cursor-pointer"

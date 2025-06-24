@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import SupplierMonitor from '../../components/supplier/SupplierMonitor'
 import api from '../../components/common/api'
+import SupplierSales from '../../components/supplier/SupplierSales'
 
 
 const SupplierDashboard = () => {
@@ -53,6 +54,7 @@ const SupplierDashboard = () => {
     <>
       <div className='p-5 flex flex-col gap-5'> 
         <SupplierMonitor orderData={orderData} deliveredOrderCount={deliveredOrderCount} totalSupplierCount={totalSupplierCount}/>
+        <SupplierSales/>
       </div>
     </>
   )

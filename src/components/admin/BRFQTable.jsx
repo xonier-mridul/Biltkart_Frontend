@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
   FaEye,
   FaChevronLeft,
@@ -10,7 +10,7 @@ import {
 import { IoIosSend } from "react-icons/io";
 import { FaCheck } from "react-icons/fa6";
 
-const BRFQTable = ({ BRFQData }) => {
+const BRFQTable = ({ BRFQData, handlePageChange, currentPage, totalPages }) => {
 
   // States
   const [searchTerm, setSearchTerm] = useState("");
@@ -62,11 +62,11 @@ const BRFQTable = ({ BRFQData }) => {
                 <tr>
                   <td className="p-4 border-b-[1px] border-[#f1f1f1]">
                     {" "}
-                    {item._id}{" "}
+                   <Link className='hover:text-green-500 transition-all' to={`detail/${item._id}`}> {item._id}</Link>
                   </td>
                   <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]">
                     {" "}
-                    {item.rfqId?._id}{" "}
+                   <Link className="hover:text-green-500 transition-all" to={`/admin/rfq-list/rfq-detail/${item.rfqId?._id}`}> {item.rfqId?._id}</Link>
                   </td>
                   <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]">
                     {" "}
@@ -74,7 +74,7 @@ const BRFQTable = ({ BRFQData }) => {
                   </td>
                   <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]">
                     {" "}
-                    <span className="capitalize"> {item.rfqId?.createdBy?.name}</span>
+                   <Link to={`/admin/user-profile/${item.rfqId?.createdBy?._id}`} className="hover:text-green-500 transition-all" > <span className="capitalize"> {item.rfqId?.createdBy?.name}</span> </Link>
                   </td>
                   <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]">
                     <div className="flex items-center gap-4">
@@ -90,11 +90,56 @@ const BRFQTable = ({ BRFQData }) => {
               ))
             ) : (
               <tr className="p-4">
-                <td colSpan={5}> Data not found </td>
+                <td colSpan={5} className="text-center p-4"> Data not found </td>
               </tr>
             )}
           </tbody>
         </table>
+         <div className="flex justify-end items-center p-6 pb-0">
+                                        <div className="flex items-center gap-2">
+                                          <span
+                                            className={`cursor-pointer p-2 ${
+                                              currentPage === 1 ? "opacity-30 cursor-not-allowed" : ""
+                                            }`}
+                                            onClick={() => handlePageChange(currentPage - 1)}
+                                          >
+                                            <FaChevronLeft />
+                                          </span>
+                              
+                                          {(() => {
+                                            const startPage = Math.max(1, currentPage - 1);
+                                            const endPage = Math.min(totalPages, startPage + 2);
+                                            const pagesToShow = [];
+                              
+                                            for (let i = startPage; i <= endPage; i++) {
+                                              pagesToShow.push(
+                                                <button
+                                                  key={i}
+                                                  onClick={() => handlePageChange(i)}
+                                                  className={`h-9 w-9 rounded-lg flex items-center justify-center cursor-pointer ${
+                                                    currentPage === i ? "bg-emerald-600 text-white" : ""
+                                                  }`}
+                                                >
+                                                  {i}
+                                                </button>
+                                              );
+                                            }
+                              
+                                            return pagesToShow;
+                                          })()}
+                              
+                                          <span
+                                            className={`cursor-pointer p-2 ${
+                                              currentPage === totalPages
+                                                ? "opacity-30 cursor-not-allowed"
+                                                : ""
+                                            }`}
+                                            onClick={() => handlePageChange(currentPage + 1)}
+                                          >
+                                            <FaChevronRight />
+                                          </span>
+                                        </div>
+                                      </div>
       </div>
     </>
   );

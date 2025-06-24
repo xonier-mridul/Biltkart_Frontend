@@ -10,6 +10,7 @@ const BRFQAssign = ({ brfqData, suppliers }) => {
   const navigate = useNavigate();
 
   const [selectedSuppliers, setSelectedSuppliers] = useState([]);
+  const [errMessage, setErrMessage] = useState(null)
 
   const quantity = brfqData?.rfqId?.quantity
  
@@ -56,10 +57,11 @@ const BRFQAssign = ({ brfqData, suppliers }) => {
       if (response.status === 200) {
         toast.success("BRFQ assigned successfully");
         setSelectedSuppliers([]); 
+        setErrMessage(null)
       }
     } catch (error) {
       console.error(error.response?.data?.message);
-      toast.error(error.response?.data?.message);
+      setErrMessage(error.response?.data?.message);
     }
   };
   
@@ -148,7 +150,7 @@ const BRFQAssign = ({ brfqData, suppliers }) => {
             <h2 className="text-2xl font-semibold">
               Select suppliers for assign BRFQ
             </h2>
-            <form onSubmit={handleSubmit}>
+            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <select
                 className="w-full outline-none p-2 border-1 bg-white border-[#E4E6EF] rounded-lg capitalize"
                 name="supplier"
@@ -164,9 +166,11 @@ const BRFQAssign = ({ brfqData, suppliers }) => {
                   </option>
                 ))}
               </select>
+               <p className="text-red-500">{errMessage}</p>
               <button
                 type="submit"
-                className="mt-4 bg-emerald-600 text-white px-5 py-2 rounded-md"
+                disabled={selectedSuppliers.length === 0}
+                className=" w-fit bg-emerald-600 disabled:bg-emerald-300 text-white px-5 py-2 rounded-md"
               >
                 Assign
               </button>

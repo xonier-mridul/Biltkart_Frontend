@@ -40,13 +40,13 @@ const MyQuotationTable = ({myQuotationData}) => {
                         <tbody>
                        {length > 0 ? filteredData.map((item, index) => (
                          <tr key={item._id}>
-                              <td className="p-4 border-b-[1px] border-[#f1f1f1] ">   {item.brfqId?._id || "N/A"} </td>
+                              <td className="p-4 border-b-[1px] border-[#f1f1f1] ">  <Link to={`quotation-detail/${item._id}`} className='hover:text-green-500 transition-all'> {item.brfqId?._id || "N/A"} </Link> </td>
                               <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]"><span className='capitalize'>{item.brfqId?.rfqId?.product || "N/A"}</span></td>
                               <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]">
                                 <span className=' text-lime-500 bg-emerald-50  text-sm  py-2 px-4 rounded-lg text-nowrap font-medium'>{item.brfqId?.rfqId?.quantity || "N/A"} ({item.brfqId?.rfqId?.measurement}) </span>
                               </td>
                               <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]">{item.brfqId?.rfqId?.DeliveryLocation || "N/A"}</td>
-                              <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]">  <span className='text-orange-400 p-1 px-4 rounded-lg bg-orange-50'>{new Date(item.brfqId?.rfqId?.fromDate).toLocaleDateString()|| "N/A"}</span></td>
+                              <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]">  <span className='text-orange-400 p-1 px-4 rounded-lg bg-orange-50 text-sm'>{new Date(item.brfqId?.rfqId?.fromDate).toLocaleDateString()|| "N/A"}</span></td>
                               <td className="p-4 border-b-[1px] border-l-1 border-[#f1f1f1]"><div className='flex items-center  gap-2'>
                                   {item.process === "negotiate" && <Link to={`quotation-edit/${item._id}`} className='rounded-lg bg-orange-500 px-2 py-2 text-white cursor-pointer text-lg'><MdEdit /></Link >}
                                   <Link to={`quotation-detail/${item._id}`} className='rounded-lg bg-teal-600 px-2 py-2 text-white cursor-pointer text-lg'><FaEye /></Link >
